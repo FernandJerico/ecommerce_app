@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/onboarding_bloc.dart';
+import '../widgets/onboarding_widgets.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -31,25 +32,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             .add(OnboardingEvent());
                         debugPrint(value.toString());
                       },
-                      children: [
-                        Image.asset(
-                          'assets/images/onboarding-1.png',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Image.asset(
-                          'assets/images/onboarding-2.png',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Image.asset(
-                          'assets/images/onboarding-3.png',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
+                      children: const [
+                        OnboardingPages(
+                            imagePath: 'assets/images/onboarding-1.png'),
+                        OnboardingPages(
+                            imagePath: 'assets/images/onboarding-2.png'),
+                        OnboardingPages(
+                            imagePath: 'assets/images/onboarding-3.png'),
                       ]),
                   Positioned(
                     bottom: 140,
