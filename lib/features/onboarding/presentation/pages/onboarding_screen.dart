@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       dotsCount: 3,
                       mainAxisAlignment: MainAxisAlignment.center,
                       decorator: DotsDecorator(
-                        color: whiteColor,
+                        color: greyColor1,
                         activeColor: orangeColor,
                         size: const Size.square(8.0),
                         activeSize: const Size(32.0, 8.0),
@@ -64,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       width: 335,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: whiteColor,
+                            backgroundColor: greyColor1,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(13),
@@ -79,7 +80,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 curve: Curves.easeIn,
                               );
                             } else {
-                              // Handle action when the last page is reached
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return const LoginScreen();
+                                },
+                              ));
                             }
                           },
                           child: Text(
