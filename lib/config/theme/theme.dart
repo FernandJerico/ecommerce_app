@@ -17,6 +17,9 @@ Color dangerColor = Colors.red;
 final ralewayFont32Bold = GoogleFonts.raleway(
     fontSize: 32, fontWeight: FontWeight.bold, color: darkColor);
 
+final ralewayFont16Bold = GoogleFonts.raleway(
+    fontSize: 16, fontWeight: FontWeight.bold, color: darkColor);
+
 final ralewayFont16w500 = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.w500, color: darkColor);
 
@@ -33,8 +36,11 @@ final poppinsFont16w400 = GoogleFonts.poppins(
     fontSize: 16, fontWeight: FontWeight.w400, color: greyColor);
 
 // Poppins Font
+final poppinsFont16wNormal = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.normal, color: greyColor2);
+
 final poppinsFont14w500 = GoogleFonts.poppins(
-    fontSize: 14, fontWeight: FontWeight.w500, color: darkColor);
+    fontSize: 14, fontWeight: FontWeight.w500, color: greyColor2);
 
 final poppinsFont12wNormal = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.normal, color: greyColor2);
