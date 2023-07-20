@@ -20,3 +20,15 @@ class PasswordEvent extends AuthEvent {
   final String password;
   const PasswordEvent(this.password);
 }
+
+class StartTimerEvent extends AuthEvent {
+  final int durationInSeconds;
+
+  StartTimerEvent(this.durationInSeconds);
+}
+
+class TimerTickEvent extends AuthEvent {
+  final int remainingSeconds;
+
+  TimerTickEvent(this.remainingSeconds);
+}

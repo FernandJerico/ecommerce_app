@@ -28,4 +28,12 @@ class AuthState {
   }
 }
 
+class TimerRunningState extends AuthState {
+  final int remainingSeconds;
+
+  TimerRunningState(this.remainingSeconds);
+}
+
+class TimerFinishedState extends AuthState {}
+
 class AuthInitial extends AuthState {}

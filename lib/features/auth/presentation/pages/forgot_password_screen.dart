@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
+import 'package:ecommerce_app/features/auth/presentation/pages/verification_code_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -73,7 +73,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
+                              builder: (context) =>
+                                  const VerificationCodeScreen()),
                         );
                         return false;
                       },
