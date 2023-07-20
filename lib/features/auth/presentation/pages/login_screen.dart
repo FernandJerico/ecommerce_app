@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: buttonBackBgColor,
+                            color: greyColor1,
                             borderRadius: BorderRadius.circular(50)),
                         height: 44,
                         width: 44,
