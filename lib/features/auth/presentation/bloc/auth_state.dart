@@ -1,14 +1,30 @@
 part of 'auth_bloc.dart';
 
 class AuthState {
+  final String name;
   final String email;
   final String password;
+  final bool obscureText;
 
-  const AuthState({this.email = "", this.password = ""});
+  const AuthState({
+    this.name = "",
+    this.email = "",
+    this.password = "",
+    this.obscureText = true,
+  });
 
-  AuthState copyWith({String? email, String? password}) {
+  AuthState copyWith({
+    String? name,
+    String? email,
+    String? password,
+    bool? obscureText,
+  }) {
     return AuthState(
-        email: email ?? this.email, password: password ?? this.password);
+      name: name ?? this.name,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      obscureText: obscureText ?? this.obscureText,
+    );
   }
 }
 

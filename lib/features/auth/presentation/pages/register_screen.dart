@@ -50,19 +50,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             Text(
                               'Register Account',
-                              style: ralewayFont(
-                                  fontSize: 32, fontWeight: FontWeight.bold),
+                              style: ralewayFont32Bold,
                             ),
                             const SizedBox(
                               height: 6,
                             ),
                             Text(
                               'Fill Your Details Or Continue With \nSocial Media',
-                              style: poppinsFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: greyColor,
-                              ),
+                              style: poppinsFont16w400,
                               textAlign: TextAlign.center,
                             )
                           ],
@@ -79,27 +74,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             children: [
                               Text(
                                 'Your Name',
-                                style: ralewayFont(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                style: ralewayFont16w500,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              buildFormLogin('xxxxxxxx', 'text', (value) {
-                                context.read<AuthBloc>().add(EmailEvent(value));
+                              buildFormLogin(context, 'xxxxxxxx', 'text',
+                                  (value) {
+                                context.read<AuthBloc>().add(NameEvent(value));
                               }),
                               const SizedBox(
                                 height: 15,
                               ),
                               Text(
                                 'Email Address',
-                                style: ralewayFont(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                style: ralewayFont16w500,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              buildFormLogin('loremipsum@gmail.com', 'email',
+                              buildFormLogin(
+                                  context, 'loremipsum@gmail.com', 'email',
                                   (value) {
                                 context.read<AuthBloc>().add(EmailEvent(value));
                               }),
@@ -108,13 +103,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               Text(
                                 'Password',
-                                style: ralewayFont(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                style: ralewayFont16w500,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              buildFormLogin('Enter password', 'password',
+                              buildFormLogin(
+                                  context, 'Enter password', 'password',
                                   (value) {
                                 context
                                     .read<AuthBloc>()

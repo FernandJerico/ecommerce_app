@@ -50,19 +50,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text(
                               'Hello Again!',
-                              style: ralewayFont(
-                                  fontSize: 32, fontWeight: FontWeight.bold),
+                              style: ralewayFont32Bold,
                             ),
                             const SizedBox(
                               height: 6,
                             ),
                             Text(
                               'Fill Your Details Or Continue With \nSocial Media',
-                              style: poppinsFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: greyColor,
-                              ),
+                              style: poppinsFont16w400,
                               textAlign: TextAlign.center,
                             )
                           ],
@@ -79,13 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               Text(
                                 'Email Address',
-                                style: ralewayFont(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                style: ralewayFont16w500,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              buildFormLogin('loremipsum@gmail.com', 'email',
+                              buildFormLogin(
+                                  context, 'loremipsum@gmail.com', 'email',
                                   (value) {
                                 context.read<AuthBloc>().add(EmailEvent(value));
                               }),
@@ -94,13 +89,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Text(
                                 'Password',
-                                style: ralewayFont(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                style: ralewayFont16w500,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              buildFormLogin('Enter password', 'password',
+                              buildFormLogin(
+                                  context, 'Enter password', 'password',
                                   (value) {
                                 context
                                     .read<AuthBloc>()
@@ -117,10 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {},
                           child: Text(
                             'Recovery Password',
-                            style: poppinsFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: greyColor2),
+                            style: poppinsFont12wNormal,
                           ),
                         ),
                       ),
@@ -141,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       buildButtonGoogle(context, 'Sign In With Google', () {}),
                       const SizedBox(
-                        height: 110,
+                        height: 90,
                       ),
                       bottomText(
                         'New User?',

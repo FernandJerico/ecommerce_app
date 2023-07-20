@@ -89,10 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           },
                           child: Text(
                             state.page < 1 ? 'Get Started' : 'Next',
-                            style: ralewayFont(
-                                color: darkColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
+                            style: ralewayFont14w600Dark,
                           )),
                     ),
                   )
