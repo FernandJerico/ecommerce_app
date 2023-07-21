@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Color Palette
 Color primaryColor = const Color(0xff0D6EFD);
+Color drawerColor = const Color(0xff1483C2);
 Color darkColor = const Color(0xff2B2B2B);
 Color backgroundColor = const Color(0xffFFFFFF);
 Color whiteColor = const Color(0xffFFFFFF);
@@ -16,6 +17,9 @@ Color dangerColor = Colors.red;
 // Raleway Font
 final ralewayFont32Bold = GoogleFonts.raleway(
     fontSize: 32, fontWeight: FontWeight.bold, color: darkColor);
+
+final ralewayFont20Bold = GoogleFonts.raleway(
+    fontSize: 20, fontWeight: FontWeight.bold, color: whiteColor);
 
 final ralewayFont21semiBold = GoogleFonts.raleway(
     fontSize: 21, fontWeight: FontWeight.w600, color: darkColor);
@@ -31,6 +35,9 @@ final ralewayFont16semiBold = GoogleFonts.raleway(
 
 final ralewayFont16w500 = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.w500, color: darkColor);
+
+final ralewayFont16w500White = GoogleFonts.raleway(
+    fontSize: 16, fontWeight: FontWeight.w500, color: whiteColor);
 
 final ralewayFont16w500Grey2 = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.w500, color: greyColor2);

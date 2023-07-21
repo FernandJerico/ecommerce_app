@@ -44,26 +44,56 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
+  double xOffset = 0;
+  double yOffset = 0;
+  bool isDrawerOpen = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: greyColor1,
-      body: Stack(
+    return AnimatedContainer(
+      transform: Matrix4.translationValues(xOffset, yOffset, 0)
+        ..scale(isDrawerOpen ? 0.75 : 1.00)
+        ..rotateZ(isDrawerOpen ? 50 : 0),
+      duration: const Duration(milliseconds: 200),
+      decoration: BoxDecoration(
+          color: greyColor1,
+          borderRadius: BorderRadius.circular(isDrawerOpen ? 25 : 0)),
+      child: Stack(
         children: [
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 12),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          InkWell(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                  'assets/icons/Hamburger.svg')),
+                          isDrawerOpen
+                              ? InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      xOffset = 0;
+                                      yOffset = 0;
+                                      isDrawerOpen = false;
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                      'assets/icons/Hamburger.svg'))
+                              : InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      xOffset = 170;
+                                      yOffset = 150;
+                                      isDrawerOpen = true;
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                      'assets/icons/Hamburger.svg')),
                           Image.asset(
                             'assets/images/logo-explore.png',
                             scale: 1.8,
