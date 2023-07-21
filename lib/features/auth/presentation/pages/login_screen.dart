@@ -3,6 +3,7 @@ import 'package:ecommerce_app/features/auth/presentation/pages/register_screen.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../home/presentation/pages/home_screen.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/auth_widgets.dart';
 import 'forgot_password_screen.dart';
@@ -131,7 +132,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Sign In',
                         () {
                           if (formKey.currentState!.validate()) {
-                            Navigator.pop(context);
+                            Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(
+                              builder: (context) {
+                                return const HomeScreen();
+                              },
+                            ), (route) => false);
                           }
                         },
                       ),

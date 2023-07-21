@@ -26,6 +26,9 @@ final ralewayFont18semiBold = GoogleFonts.raleway(
 final ralewayFont16Bold = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.bold, color: darkColor);
 
+final ralewayFont16semiBold = GoogleFonts.raleway(
+    fontSize: 16, fontWeight: FontWeight.w600, color: darkColor);
+
 final ralewayFont16w500 = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.w500, color: darkColor);
 
@@ -56,3 +59,5 @@ final poppinsFont14w500 = GoogleFonts.poppins(
 
 final poppinsFont12wNormal = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.normal, color: greyColor2);
+
+const poppinsFontCustom = GoogleFonts.poppins;

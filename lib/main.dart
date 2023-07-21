@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
 void main() {
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => AuthBloc(),
+          ),
+          BlocProvider(
+            create: (context) => HomeBloc(),
           ),
         ],
         child: MaterialApp(
