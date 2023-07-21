@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/profile/presentation/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -73,7 +74,13 @@ class _NavbarScreenState extends State<NavbarScreen> {
                         icon: SvgPicture.asset('assets/icons/notification.svg'),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const ProfileScreen();
+                            },
+                          ));
+                        },
                         icon: SvgPicture.asset('assets/icons/profile.svg'),
                       ),
                     ]),
