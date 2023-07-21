@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Text(
               'Select Category',
@@ -216,8 +216,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Popular Shoes',
                   style: ralewayFont16w500,
                 ),
-                TextButton(
-                  onPressed: () {},
+                InkWell(
+                  onTap: () {},
                   child: Text(
                     'See all',
                     style: poppinsFontCustom(
