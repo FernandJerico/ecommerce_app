@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 
 import '../../domain/entities/product.dart';
 import '../bloc/home_bloc.dart';
+import '../widgets/home_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -172,33 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ...List<Widget>.generate(
                         category.length,
                         (int index) {
-                          return GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(SelectCategoryEvent(index));
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 110,
-                              decoration: BoxDecoration(
-                                color: state.selectedCategory == index
-                                    ? primaryColor
-                                    : whiteColor,
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              child: Center(
-                                  child: Text(
-                                category[index],
-                                style: poppinsFontCustom(
-                                    color: state.selectedCategory == index
-                                        ? whiteColor
-                                        : darkColor,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.normal),
-                              )),
-                            ),
-                          );
+                          return products(context, index, state, category);
                         },
                       ).toList(),
                     ],
@@ -209,25 +184,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Popular Shoes',
-                  style: ralewayFont16w500,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'See all',
-                    style: poppinsFontCustom(
-                        fontSize: 12,
-                        color: primaryColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
+            textSpaceBetween(
+                'Popular Shoes', ralewayFont16w500, 'See all', () {}),
             const SizedBox(
               height: 15,
             ),
@@ -321,25 +279,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'New Arrivals',
-                  style: ralewayFont16semiBold,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'See all',
-                    style: poppinsFontCustom(
-                        fontSize: 12,
-                        color: primaryColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
+            textSpaceBetween(
+                'New Arrivals', ralewayFont16semiBold, 'See all', () {}),
             SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset('assets/images/new-arrivals.png'))
