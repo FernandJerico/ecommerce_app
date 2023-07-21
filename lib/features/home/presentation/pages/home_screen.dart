@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/home/presentation/pages/detail_product_screen.dart';
 import 'package:ecommerce_app/features/navbar/presentation/pages/navbar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -244,82 +245,93 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: productList.length,
                           itemBuilder: (context, index) {
                             final product = productList[index];
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(12),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Iconify(
-                                          product.isFavorited
-                                              ? Mdi.cards_heart
-                                              : Mdi.cards_heart_outline,
-                                          color: product.isFavorited
-                                              ? dangerColor
-                                              : greyColor2,
-                                          size: 18,
-                                        ),
-                                        Center(
-                                          child: Image.asset(
-                                            product.imagePath,
-                                            height: 90,
-                                            fit: BoxFit.contain,
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return DetailProductScreen(
+                                      product: product,
+                                    );
+                                  },
+                                ));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(12),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Iconify(
+                                            product.isFavorited
+                                                ? Mdi.cards_heart
+                                                : Mdi.cards_heart_outline,
+                                            color: product.isFavorited
+                                                ? dangerColor
+                                                : greyColor2,
+                                            size: 18,
                                           ),
-                                        ),
-                                        const SizedBox(height: 7),
-                                        Text(
-                                          'Best Seller',
-                                          style: poppinsFontCustom(
-                                              fontSize: 12,
-                                              color: primaryColor,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        const SizedBox(height: 7),
-                                        Text(product.name,
-                                            style: ralewayFont16semiBold),
-                                        const SizedBox(height: 7),
-                                        Text(
-                                            NumberFormat.simpleCurrency(
-                                                    name: 'IDR')
-                                                .format(product.price),
-                                            style: poppinsFont14w500),
-                                      ],
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                          height: 34,
-                                          width: 34,
-                                          decoration: BoxDecoration(
-                                            color: primaryColor,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(16),
-                                                    bottomRight:
-                                                        Radius.circular(16)),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(6),
-                                            child: Iconify(
-                                              Tabler.plus,
-                                              color: whiteColor,
+                                          Center(
+                                            child: Image.asset(
+                                              product.imagePath,
+                                              height: 90,
+                                              fit: BoxFit.contain,
                                             ),
-                                          )),
+                                          ),
+                                          const SizedBox(height: 7),
+                                          Text(
+                                            'Best Seller',
+                                            style: poppinsFontCustom(
+                                                fontSize: 12,
+                                                color: primaryColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          const SizedBox(height: 7),
+                                          Text(product.name,
+                                              style: ralewayFont16semiBold),
+                                          const SizedBox(height: 7),
+                                          Text(
+                                              NumberFormat.simpleCurrency(
+                                                      name: 'IDR')
+                                                  .format(product.price),
+                                              style: poppinsFont14w500),
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                ],
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                            height: 34,
+                                            width: 34,
+                                            decoration: BoxDecoration(
+                                              color: primaryColor,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(16),
+                                                      bottomRight:
+                                                          Radius.circular(16)),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(6),
+                                              child: Iconify(
+                                                Tabler.plus,
+                                                color: whiteColor,
+                                              ),
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },
