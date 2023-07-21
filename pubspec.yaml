@@ -49,9 +49,9 @@ flutter_native_splash:
   web: false
 
   color: "#0D6EFD"
-  image: "assets/images/logo_nike.png"
+  image: "assets/images/logo-nike-large.png"
   color_dark: "#7CA153"
-  image_dark: "assets/images/logo_nike.png"
+  image_dark: "assets/images/logo-nike-large.png"
 
 dev_dependencies:
   flutter_test:
