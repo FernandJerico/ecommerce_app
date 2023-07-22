@@ -12,7 +12,7 @@ import 'package:iconify_flutter/icons/ri.dart';
 import 'package:iconify_flutter/icons/tabler.dart';
 import 'package:intl/intl.dart';
 
-import '../../domain/entities/product.dart';
+import '../../data/model/product_model.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_widget.dart';
 

@@ -1,10 +1,10 @@
-import 'package:ecommerce_app/features/home/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../config/theme/theme.dart';
 import '../../../cart/presentation/pages/cart_screen.dart';
+import '../../data/model/product_model.dart';
 
 class DetailProductScreen extends StatefulWidget {
   final Product product;
