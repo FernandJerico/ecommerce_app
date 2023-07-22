@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/cart/presentation/pages/checkout_screen.dart';
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/theme/theme.dart';
@@ -74,13 +74,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
           buildPositionedBottomCheckout(
             context,
-            () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return const CheckoutScreen();
-                },
-              ));
-            },
+            () => Navigator.pushNamed(context, AppRoutes.checkout),
           )
         ],
       )),

@@ -1,5 +1,5 @@
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
-import 'package:ecommerce_app/features/cart/presentation/pages/cart_screen.dart';
 import 'package:ecommerce_app/features/home/presentation/pages/detail_product_screen.dart';
 import 'package:ecommerce_app/features/navbar/presentation/pages/navbar_screen.dart';
 import 'package:flutter/material.dart';
@@ -110,11 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return const CartScreen();
-                                      },
-                                    ));
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.cart);
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/icons/bag-2.svg'),

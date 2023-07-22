@@ -1,8 +1,8 @@
 import 'package:ecommerce_app/config/theme/theme.dart';
-import 'package:ecommerce_app/features/profile/presentation/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../config/routes/app_routes.dart';
 import '../../widgets/navbar_widget.dart';
 
 class NavbarScreen extends StatefulWidget {
@@ -74,13 +74,8 @@ class _NavbarScreenState extends State<NavbarScreen> {
                         icon: SvgPicture.asset('assets/icons/notification.svg'),
                       ),
                       IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const ProfileScreen();
-                            },
-                          ));
-                        },
+                        onPressed: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                         icon: SvgPicture.asset('assets/icons/profile.svg'),
                       ),
                     ]),

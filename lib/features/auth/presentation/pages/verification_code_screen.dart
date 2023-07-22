@@ -1,9 +1,9 @@
-import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../../config/routes/app_routes.dart';
 import '../../../../config/theme/theme.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -121,12 +121,8 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         ),
                         buildButton(context, 'Verify', () {
                           if (formKey.currentState!.validate()) {
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(
-                              builder: (context) {
-                                return const LoginScreen();
-                              },
-                            ));
+                            Navigator.pushReplacementNamed(
+                                context, AppRoutes.login);
                           }
                         }),
                         const SizedBox(

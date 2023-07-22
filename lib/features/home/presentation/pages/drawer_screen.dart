@@ -1,5 +1,5 @@
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
-import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bx.dart';
@@ -90,11 +90,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
             height: 20,
           ),
           listMenu('assets/icons/logout.svg', 'Sign Out', () {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-              builder: (context) {
-                return const LoginScreen();
-              },
-            ), (route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.login, (route) => false);
           }),
         ]),
       ),

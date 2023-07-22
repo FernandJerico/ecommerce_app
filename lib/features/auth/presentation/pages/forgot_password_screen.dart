@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/presentation/pages/verification_code_screen.dart';
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -70,12 +70,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   builder: (BuildContext context) {
                     return WillPopScope(
                       onWillPop: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const VerificationCodeScreen()),
-                        );
+                        Navigator.pushReplacementNamed(
+                            context, AppRoutes.verificationCode);
                         return false;
                       },
                       child: AlertDialog(

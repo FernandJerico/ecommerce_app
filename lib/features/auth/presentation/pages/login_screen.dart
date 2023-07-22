@@ -1,12 +1,10 @@
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
-import 'package:ecommerce_app/features/auth/presentation/pages/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../home/presentation/pages/initial_screen.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/auth_widgets.dart';
-import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -112,11 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.bottomRight,
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return const ForgotPasswordScreen();
-                              },
-                            ));
+                            Navigator.pushNamed(
+                                context, AppRoutes.forgotPassword);
                           },
                           child: Text(
                             'Recovery Password',
@@ -132,12 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Sign In',
                         () {
                           if (formKey.currentState!.validate()) {
-                            Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(
-                              builder: (context) {
-                                return const InitialScreen();
-                              },
-                            ), (route) => false);
+                            Navigator.pushNamed(context, AppRoutes.home);
                           }
                         },
                       ),
@@ -152,11 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'New User?',
                         ' Create Account',
                         () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const RegisterScreen();
-                            },
-                          ));
+                          Navigator.pushNamed(context, AppRoutes.register);
                         },
                       )
                     ]),

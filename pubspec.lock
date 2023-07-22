@@ -166,14 +166,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.8.4"
-  flutter_slidable:
-    dependency: "direct main"
-    description:
-      name: flutter_slidable
-      sha256: cc4231579e3eae41ae166660df717f4bad1359c87f4a4322ad8ba1befeb3d2be
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -200,14 +192,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_zoom_drawer:
-    dependency: "direct main"
-    description:
-      name: flutter_zoom_drawer
-      sha256: be25be3536e030096c356b7b0fbeaee418b5e0994d87ff74875032b349cb4079
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.1"
   google_fonts:
     dependency: "direct main"
     description:

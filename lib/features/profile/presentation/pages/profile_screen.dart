@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/profile/presentation/pages/edit_profile_screen.dart';
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/features/profile/presentation/widget/profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
@@ -64,13 +64,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     bottom: 0,
                     right: 13,
                     child: InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return const EditProfileScreen();
-                          },
-                        ));
-                      },
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.editProfile),
                       child: Container(
                         height: 22,
                         width: 22,

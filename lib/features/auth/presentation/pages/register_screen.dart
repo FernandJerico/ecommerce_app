@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -140,11 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         'Already Have Account?',
                         ' Log In',
                         () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const LoginScreen();
-                            },
-                          ));
+                          Navigator.pushNamed(context, AppRoutes.login);
                         },
                       )
                     ]),
