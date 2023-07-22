@@ -37,55 +37,56 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       bottomLeft: Radius.circular(16),
                     ),
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  child: ListView(children: [
+                    Text(
+                      'Contact Information',
+                      style: ralewayFont14w600Dark,
+                    ),
+                    buildContactInformation('assets/icons/chat.svg',
+                        'loremipsum@gmail.com', 'Email'),
+                    buildContactInformation(
+                        'assets/icons/call.svg', '+62821-39-488-953', 'Phone'),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Address',
+                      style: ralewayFont14w600Dark,
+                    ),
+                    Row(
                       children: [
                         Text(
-                          'Contact Information',
-                          style: ralewayFont14w600Dark,
+                          'Rungkut, Kota Surabaya, Jawa Timur',
+                          style: poppinsFont12w500,
                         ),
-                        buildContactInformation('assets/icons/chat.svg',
-                            'loremipsum@gmail.com', 'Email'),
-                        buildContactInformation('assets/icons/call.svg',
-                            '+62821-39-488-953', 'Phone'),
-                        const SizedBox(
-                          height: 15,
+                        const Expanded(child: SizedBox()),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: greyColor,
+                          ),
                         ),
-                        Text(
-                          'Address',
-                          style: ralewayFont14w600Dark,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Rungkut, Kota Surabaya, Jawa Timur',
-                              style: poppinsFont12w500,
-                            ),
-                            const Expanded(child: SizedBox()),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: greyColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Image.asset(
-                          'assets/images/Map.png',
-                          height: 101,
-                          width: 295,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Payment Method',
-                          style: ralewayFont14w600Dark,
-                        ),
-                        buildPaymentMethod('assets/images/mandiri.png',
-                            'Fernand Jerico', '**** **** 0696 4629'),
-                      ]),
+                      ],
+                    ),
+                    Image.asset(
+                      'assets/images/Map.png',
+                      height: 101,
+                      width: 295,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Payment Method',
+                      style: ralewayFont14w600Dark,
+                    ),
+                    buildPaymentMethod('assets/images/mandiri.png',
+                        'Fernand Jerico', '**** **** 0696 4629'),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                  ]),
                 )
               ],
             ),

@@ -12,11 +12,18 @@ Color greyColor = const Color(0xff707B81);
 Color orangeColor = const Color(0xffFFB21A);
 Color greyColor2 = const Color(0xff6A6A6A);
 Color secondaryColor = const Color(0xffF87265);
+Color onboardingTextColor = const Color(0xffECECEC);
 Color dangerColor = Colors.red;
 
 // Raleway Font
 final ralewayFont32Bold = GoogleFonts.raleway(
     fontSize: 32, fontWeight: FontWeight.bold, color: darkColor);
+
+final ralewayOnboardingText1 = GoogleFonts.raleway(
+    fontSize: 30, fontWeight: FontWeight.w900, color: onboardingTextColor);
+
+final ralewayOnboardingText2 = GoogleFonts.raleway(
+    fontSize: 34, fontWeight: FontWeight.bold, color: onboardingTextColor);
 
 final ralewayFont26Bold = GoogleFonts.raleway(
     fontSize: 26, fontWeight: FontWeight.bold, color: darkColor);
@@ -96,5 +103,10 @@ final poppinsFont12w500 = GoogleFonts.poppins(
 
 final poppinsFont12wNormal = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.normal, color: greyColor2);
+
+final poppinsOnboardingText = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: const Color(0xffD8D8D8));
 
 const poppinsFontCustom = GoogleFonts.poppins;
