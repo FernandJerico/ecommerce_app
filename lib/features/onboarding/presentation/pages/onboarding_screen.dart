@@ -1,5 +1,8 @@
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
+import 'package:ecommerce_app/features/onboarding/presentation/widgets/onboarding1_widget.dart';
+import 'package:ecommerce_app/features/onboarding/presentation/widgets/onboarding2_widget.dart';
+import 'package:ecommerce_app/features/onboarding/presentation/widgets/onboarding3_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +19,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   PageController pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
+    final sizes = MediaQuery.of(context).size;
     return Scaffold(
       body: BlocBuilder<OnboardingBloc, OnboardingState>(
         builder: (context, state) {
@@ -31,39 +35,55 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             .add(OnboardingEvent());
                         debugPrint(value.toString());
                       },
-                      children: [
-                        Image.asset(
-                          'assets/images/onboarding-1.png',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Image.asset(
-                          'assets/images/onboarding-2.png',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Image.asset(
-                          'assets/images/onboarding-3.png',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
+                      children: const [
+                        OnboardingFirst(),
+                        OnboardingSecond(),
+                        OnboardingThird(),
                       ]),
+
+                  // use dot indicator
+
+                  // Positioned(
+                  //   bottom: 140,
+                  //   child: DotsIndicator(
+                  //     position: state.page,
+                  //     dotsCount: 3,
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     decorator: DotsDecorator(
+                  //       color: greyColor1,
+                  //       activeColor: orangeColor,
+                  //       size: const Size.square(8.0),
+                  //       activeSize: const Size(32.0, 8.0),
+                  //       activeShape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(5.0),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+
+                  // use row
+
                   Positioned(
-                    bottom: 140,
-                    child: DotsIndicator(
-                      position: state.page,
-                      dotsCount: 3,
+                    bottom: state.page == 0
+                        ? sizes.height * 0.3
+                        : sizes.height * 0.2,
+                    width: sizes.width - 0.06,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      decorator: DotsDecorator(
-                        color: whiteColor,
-                        activeColor: orangeColor,
-                        size: const Size.square(8.0),
-                        activeSize: const Size(32.0, 8.0),
-                        activeShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                      children: List.generate(
+                        3,
+                        (index) => Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          height: 6,
+                          width: state.page == index ? 42 : 28,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: state.page == index
+                                ? whiteColor
+                                : state.page > index
+                                    ? whiteColor
+                                    : orangeColor,
+                          ),
                         ),
                       ),
                     ),
@@ -75,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       width: 335,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: whiteColor,
+                            backgroundColor: greyColor1,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(13),
@@ -90,15 +110,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 curve: Curves.easeIn,
                               );
                             } else {
-                              // Handle action when the last page is reached
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return const LoginScreen();
+                                },
+                              ));
                             }
                           },
                           child: Text(
                             state.page < 1 ? 'Get Started' : 'Next',
-                            style: ralewayFont(
-                                color: darkColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
+                            style: ralewayFont14w600Dark,
                           )),
                     ),
                   )

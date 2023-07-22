@@ -39,6 +39,11 @@ dependencies:
   flutter_screenutil: ^5.8.4
   dots_indicator: ^3.0.0
   flutter_bloc: ^8.1.3
+  iconify_flutter: ^0.0.5
+  flutter_svg: ^1.1.6
+  pinput: ^2.2.31
+  intl: ^0.18.1
+  flutter_swipe_action_cell: ^3.1.2
 
 flutter_native_splash:
   android: true
@@ -46,9 +51,9 @@ flutter_native_splash:
   web: false
 
   color: "#0D6EFD"
-  image: "assets/images/logo_nike.png"
+  image: "assets/images/logo-nike-large.png"
   color_dark: "#7CA153"
-  image_dark: "assets/images/logo_nike.png"
+  image_dark: "assets/images/logo-nike-large.png"
 
 dev_dependencies:
   flutter_test:
