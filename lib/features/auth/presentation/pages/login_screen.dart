@@ -36,7 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 44,
                         width: 44,
                         child: IconButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () => Navigator.pushNamed(
+                                context, AppRoutes.onboarding),
                             icon: const Icon(
                               Icons.arrow_back_ios,
                               size: 18,
