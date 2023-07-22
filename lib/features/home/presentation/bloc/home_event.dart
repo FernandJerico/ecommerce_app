@@ -7,3 +7,5 @@ class SelectCategoryEvent extends HomeEvent {
 
   SelectCategoryEvent(this.selectedCategory);
 }
+
+class ToggleDrawerEvent extends HomeEvent {}
