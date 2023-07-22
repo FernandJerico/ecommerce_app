@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/cart/presentation/pages/cart_screen.dart';
 import 'package:ecommerce_app/features/home/presentation/pages/detail_product_screen.dart';
 import 'package:ecommerce_app/features/navbar/presentation/pages/navbar_screen.dart';
 import 'package:flutter/material.dart';
@@ -75,59 +76,61 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           isDrawerOpen
-                              ? InkWell(
-                                  onTap: () {
+                              ? IconButton(
+                                  onPressed: () {
                                     setState(() {
                                       xOffset = 0;
                                       yOffset = 0;
                                       isDrawerOpen = false;
                                     });
                                   },
-                                  child: SvgPicture.asset(
+                                  icon: SvgPicture.asset(
                                       'assets/icons/Hamburger.svg'))
-                              : InkWell(
-                                  onTap: () {
+                              : IconButton(
+                                  onPressed: () {
                                     setState(() {
                                       xOffset = 170;
                                       yOffset = 150;
                                       isDrawerOpen = true;
                                     });
                                   },
-                                  child: SvgPicture.asset(
+                                  icon: SvgPicture.asset(
                                       'assets/icons/Hamburger.svg')),
                           Image.asset(
                             'assets/images/logo-explore.png',
                             scale: 1.8,
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                              height: 44,
-                              width: 44,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: whiteColor),
-                              child: Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 8, top: 8, bottom: 8),
-                                    child: SvgPicture.asset(
-                                        'assets/icons/bag-2.svg'),
+                          Container(
+                            height: 44,
+                            width: 44,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: whiteColor),
+                            child: Stack(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return const CartScreen();
+                                      },
+                                    ));
+                                  },
+                                  icon: SvgPicture.asset(
+                                      'assets/icons/bag-2.svg'),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: dangerColor),
                                   ),
-                                  Positioned(
-                                    top: 0,
-                                    right: 0,
-                                    child: Container(
-                                      width: 10,
-                                      height: 10,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: dangerColor),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

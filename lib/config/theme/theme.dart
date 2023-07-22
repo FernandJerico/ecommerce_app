@@ -42,6 +42,9 @@ final ralewayFont16w500 = GoogleFonts.raleway(
 final ralewayFont16w500White = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.w500, color: whiteColor);
 
+final ralewayFont16w500Grey = GoogleFonts.raleway(
+    fontSize: 16, fontWeight: FontWeight.w500, color: greyColor);
+
 final ralewayFont16w500Grey2 = GoogleFonts.raleway(
     fontSize: 16, fontWeight: FontWeight.w500, color: greyColor2);
 
@@ -54,6 +57,9 @@ final ralewayFont14w600 = GoogleFonts.raleway(
 final ralewayFont14w600Dark = GoogleFonts.raleway(
     fontWeight: FontWeight.w600, fontSize: 14, color: darkColor);
 
+final ralewayFont14Normal = GoogleFonts.raleway(
+    fontWeight: FontWeight.normal, fontSize: 14, color: whiteColor);
+
 final ralewayFont12wNormal = GoogleFonts.raleway(
     fontWeight: FontWeight.normal, fontSize: 12, color: greyColor2);
 
@@ -64,17 +70,29 @@ final ralewayFont12semiBold = GoogleFonts.raleway(
 final poppinsFont24semiBold = GoogleFonts.poppins(
     fontSize: 24, fontWeight: FontWeight.w600, color: darkColor);
 
-final poppinsFont16w400 = GoogleFonts.poppins(
-    fontSize: 16, fontWeight: FontWeight.w400, color: greyColor);
-
 final poppinsFont18semiBold = GoogleFonts.poppins(
     fontSize: 18, fontWeight: FontWeight.w600, color: darkColor);
+
+final poppinsFont16w500primaryColor = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.w500, color: primaryColor);
+
+final poppinsFont16w500 = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.w500, color: darkColor);
 
 final poppinsFont16wNormal = GoogleFonts.poppins(
     fontSize: 16, fontWeight: FontWeight.normal, color: greyColor2);
 
+final poppinsFont16w400 = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.w400, color: greyColor);
+
+final poppinsFont14w500Dark = GoogleFonts.poppins(
+    fontSize: 14, fontWeight: FontWeight.w500, color: darkColor);
+
 final poppinsFont14w500 = GoogleFonts.poppins(
     fontSize: 14, fontWeight: FontWeight.w500, color: greyColor2);
+
+final poppinsFont12w500 = GoogleFonts.poppins(
+    fontSize: 12, fontWeight: FontWeight.w500, color: greyColor2);
 
 final poppinsFont12wNormal = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.normal, color: greyColor2);

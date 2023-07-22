@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../config/theme/theme.dart';
+import '../../../cart/presentation/pages/cart_screen.dart';
 
 class DetailProductScreen extends StatefulWidget {
   final Product product;
@@ -54,10 +55,15 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         color: whiteColor),
                     child: Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 8, top: 8, bottom: 8),
-                          child: SvgPicture.asset('assets/icons/bag-2.svg'),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return const CartScreen();
+                              },
+                            ));
+                          },
+                          icon: SvgPicture.asset('assets/icons/bag-2.svg'),
                         ),
                         Positioned(
                           top: 0,
