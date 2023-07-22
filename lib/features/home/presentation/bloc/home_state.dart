@@ -1,17 +1,18 @@
 part of 'home_bloc.dart';
 
 class HomeState {
-  final int selectedCategory;
   final double xOffset;
   final double yOffset;
   final bool isDrawerOpen;
+  final int selectedCategory;
 
-  HomeState(this.xOffset, this.yOffset, this.isDrawerOpen,
-      {this.selectedCategory = 0});
+  HomeState(
+      {this.selectedCategory = 0,
+      this.xOffset = 0,
+      this.yOffset = 0,
+      this.isDrawerOpen = false});
 
   List<Object> get props => [xOffset, yOffset, isDrawerOpen];
 }
 
-class HomeInitial extends HomeState {
-  HomeInitial(super.xOffset, super.yOffset, super.isDrawerOpen);
-}
+class HomeInitial extends HomeState {}

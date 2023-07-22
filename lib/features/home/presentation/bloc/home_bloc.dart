@@ -4,14 +4,16 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeInitial(0, 0, false)) {
+  HomeBloc() : super(HomeInitial()) {
     on<SelectCategoryEvent>(_onCategorySelected);
 
     on<ToggleDrawerEvent>(_onToggleDrawer);
   }
 
   void _onCategorySelected(SelectCategoryEvent event, Emitter<HomeState> emit) {
-    emit(HomeState(selectedCategory: state.selectedCategory, 0, 0, false));
+    emit(HomeState(
+      selectedCategory: event.selectedCategory,
+    ));
   }
 
   void onCategorySelected(int index) {
@@ -20,9 +22,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _onToggleDrawer(ToggleDrawerEvent event, Emitter<HomeState> emit) {
     if (state.isDrawerOpen) {
-      emit(HomeState(0, 0, false));
+      emit(HomeState(xOffset: 0, yOffset: 0, isDrawerOpen: false));
     } else {
-      emit(HomeState(170, 150, true));
+      emit(HomeState(xOffset: 170, yOffset: 150, isDrawerOpen: true));
     }
   }
 }

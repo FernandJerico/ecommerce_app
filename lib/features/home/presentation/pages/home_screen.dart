@@ -195,25 +195,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          BlocBuilder<HomeBloc, HomeState>(
-                            builder: (context, state) {
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Wrap(
-                                  spacing: 10,
-                                  direction: Axis.horizontal,
-                                  children: [
-                                    ...List<Widget>.generate(
-                                      category.length,
-                                      (int index) {
-                                        return products(
-                                            context, index, state, category);
-                                      },
-                                    ).toList(),
-                                  ],
-                                ),
-                              );
-                            },
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Wrap(
+                              spacing: 10,
+                              direction: Axis.horizontal,
+                              children: [
+                                ...List<Widget>.generate(
+                                  category.length,
+                                  (int index) {
+                                    return products(
+                                        context, index, state, category);
+                                  },
+                                ).toList(),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
