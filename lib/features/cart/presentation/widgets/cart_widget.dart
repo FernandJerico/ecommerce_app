@@ -8,31 +8,23 @@ import 'package:intl/intl.dart';
 import '../../../../config/theme/theme.dart';
 import '../../data/model/cart_model.dart';
 
-Row buildAppBar(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Container(
-        decoration: BoxDecoration(
-            color: whiteColor, borderRadius: BorderRadius.circular(50)),
-        height: 44,
-        width: 44,
-        child: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              size: 18,
-            )),
-      ),
-      Text(
-        'My Cart',
-        style: ralewayFont16semiBold,
-      ),
-      const SizedBox(
-        height: 44,
-        width: 44,
-      )
-    ],
+AppBar buildAppBar(BuildContext context) {
+  return AppBar(
+    elevation: 0,
+    titleSpacing: 0,
+    leadingWidth: 50,
+    backgroundColor: greyColor1,
+    leading: IconButton(
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          size: 18,
+        )),
+    centerTitle: true,
+    title: Text(
+      'My Cart',
+      style: ralewayFont16semiBold,
+    ),
   );
 }
 
@@ -115,6 +107,7 @@ SwipeActionCell buildListProductCart(Cart item) {
             Text(
               item.name,
               style: ralewayFont16w500,
+              overflow: TextOverflow.clip,
             ),
             Text(
               NumberFormat.simpleCurrency(name: 'IDR').format(item.price),
