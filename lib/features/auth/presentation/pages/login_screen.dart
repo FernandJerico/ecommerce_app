@@ -15,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
@@ -84,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context, 'loremipsum@gmail.com', 'email',
                                   (value) {
                                 context.read<AuthBloc>().add(EmailEvent(value));
-                              }),
+                              }, emailController),
                               const SizedBox(
                                 height: 25,
                               ),
@@ -101,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context
                                     .read<AuthBloc>()
                                     .add(PasswordEvent(value));
-                              }),
+                              }, passwordController),
                             ],
                           )),
                       const SizedBox(

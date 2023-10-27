@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/forgot_password_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/register_screen.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => AuthBloc(),
+          ),
+          BlocProvider(
+            create: (context) => RegisterBloc(),
           ),
           BlocProvider(
             create: (context) => HomeBloc(),
