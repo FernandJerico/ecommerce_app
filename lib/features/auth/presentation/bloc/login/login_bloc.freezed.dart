@@ -225,12 +225,11 @@ class _$LoginImpl implements _Login {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginImpl &&
-            const DeepCollectionEquality().equals(other.data, data));
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, data);
 
   @JsonKey(ignore: true)
   @override
@@ -317,7 +316,7 @@ mixin _$LoginState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function(RegisterResponseModel data) success,
+    required TResult Function(AuthResponseModel data) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -325,7 +324,7 @@ mixin _$LoginState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function(RegisterResponseModel data)? success,
+    TResult? Function(AuthResponseModel data)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -333,7 +332,7 @@ mixin _$LoginState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(RegisterResponseModel data)? success,
+    TResult Function(AuthResponseModel data)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -423,7 +422,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function(RegisterResponseModel data) success,
+    required TResult Function(AuthResponseModel data) success,
   }) {
     return initial();
   }
@@ -434,7 +433,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function(RegisterResponseModel data)? success,
+    TResult? Function(AuthResponseModel data)? success,
   }) {
     return initial?.call();
   }
@@ -445,7 +444,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(RegisterResponseModel data)? success,
+    TResult Function(AuthResponseModel data)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -537,7 +536,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function(RegisterResponseModel data) success,
+    required TResult Function(AuthResponseModel data) success,
   }) {
     return loading();
   }
@@ -548,7 +547,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function(RegisterResponseModel data)? success,
+    TResult? Function(AuthResponseModel data)? success,
   }) {
     return loading?.call();
   }
@@ -559,7 +558,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(RegisterResponseModel data)? success,
+    TResult Function(AuthResponseModel data)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -677,7 +676,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function(RegisterResponseModel data) success,
+    required TResult Function(AuthResponseModel data) success,
   }) {
     return error(message);
   }
@@ -688,7 +687,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function(RegisterResponseModel data)? success,
+    TResult? Function(AuthResponseModel data)? success,
   }) {
     return error?.call(message);
   }
@@ -699,7 +698,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(RegisterResponseModel data)? success,
+    TResult Function(AuthResponseModel data)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -761,7 +760,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({RegisterResponseModel data});
+  $Res call({AuthResponseModel data});
 }
 
 /// @nodoc
@@ -775,13 +774,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_$SuccessImpl(
-      freezed == data
+      null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as RegisterResponseModel,
+              as AuthResponseModel,
     ));
   }
 }
@@ -792,7 +791,7 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.data);
 
   @override
-  final RegisterResponseModel data;
+  final AuthResponseModel data;
 
   @override
   String toString() {
@@ -804,12 +803,11 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other.data, data));
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, data);
 
   @JsonKey(ignore: true)
   @override
@@ -823,7 +821,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function(RegisterResponseModel data) success,
+    required TResult Function(AuthResponseModel data) success,
   }) {
     return success(data);
   }
@@ -834,7 +832,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function(RegisterResponseModel data)? success,
+    TResult? Function(AuthResponseModel data)? success,
   }) {
     return success?.call(data);
   }
@@ -845,7 +843,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(RegisterResponseModel data)? success,
+    TResult Function(AuthResponseModel data)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -893,9 +891,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements LoginState {
-  const factory _Success(final RegisterResponseModel data) = _$SuccessImpl;
+  const factory _Success(final AuthResponseModel data) = _$SuccessImpl;
 
-  RegisterResponseModel get data;
+  AuthResponseModel get data;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;

@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class RegisterResponseModel {
+class AuthResponseModel {
   final String? jwt;
   final User? user;
 
-  RegisterResponseModel({
+  AuthResponseModel({
     this.jwt,
     this.user,
   });
 
-  factory RegisterResponseModel.fromJson(String str) =>
-      RegisterResponseModel.fromMap(json.decode(str));
+  factory AuthResponseModel.fromJson(String str) =>
+      AuthResponseModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory RegisterResponseModel.fromMap(Map<String, dynamic> json) =>
-      RegisterResponseModel(
+  factory AuthResponseModel.fromMap(Map<String, dynamic> json) =>
+      AuthResponseModel(
         jwt: json["jwt"],
         user: json["user"] == null ? null : User.fromMap(json["user"]),
       );

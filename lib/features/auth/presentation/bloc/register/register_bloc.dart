@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_app/features/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:ecommerce_app/features/auth/data/models/responses/register_response_model.dart';
+import 'package:ecommerce_app/features/auth/data/models/responses/auth_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../data/models/requests/register_request_model.dart';

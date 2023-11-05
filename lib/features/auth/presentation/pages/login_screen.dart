@@ -149,6 +149,34 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               );
                             },
+                            error: (message) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(message),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () {
+                              return buildButton(
+                                context,
+                                'Sign In',
+                                () {
+                                  if (formKey.currentState!.validate()) {
+                                    final data = LoginRequestModel(
+                                        identifier: emailController.text,
+                                        password: passwordController.text);
+                                    context
+                                        .read<LoginBloc>()
+                                        .add(LoginEvent.login(data));
+                                  }
+                                },
+                              );
+                            },
                             loading: () {
                               return SizedBox(
                                 width: MediaQuery.of(context).size.width,
@@ -168,30 +196,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: whiteColor),
                                     )),
                               );
-                            },
-                            error: (message) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(message),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        builder: (context, state) {
-                          return buildButton(
-                            context,
-                            'Sign In',
-                            () {
-                              if (formKey.currentState!.validate()) {
-                                final data = LoginRequestModel(
-                                    identifier: emailController.text,
-                                    password: passwordController.text);
-                                context
-                                    .read<LoginBloc>()
-                                    .add(LoginEvent.login(data));
-                              }
                             },
                           );
                         },
