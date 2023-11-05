@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/data/models/requests/login_request_model.dart';
+import 'package:ecommerce_app/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +19,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
@@ -125,13 +135,65 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 25,
                       ),
-                      buildButton(
-                        context,
-                        'Sign In',
-                        () {
-                          if (formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, AppRoutes.home);
-                          }
+                      BlocConsumer<LoginBloc, LoginState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            orElse: () {},
+                            success: (data) {
+                              Navigator.pushReplacementNamed(
+                                  context, AppRoutes.home);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Login Success'),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            },
+                            loading: () {
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(13),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                          color: whiteColor),
+                                    )),
+                              );
+                            },
+                            error: (message) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(message),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        builder: (context, state) {
+                          return buildButton(
+                            context,
+                            'Sign In',
+                            () {
+                              if (formKey.currentState!.validate()) {
+                                final data = LoginRequestModel(
+                                    identifier: emailController.text,
+                                    password: passwordController.text);
+                                context
+                                    .read<LoginBloc>()
+                                    .add(LoginEvent.login(data));
+                              }
+                            },
+                          );
                         },
                       ),
                       const SizedBox(

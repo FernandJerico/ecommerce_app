@@ -173,8 +173,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               );
                             },
                             loading: () {
-                              return const Center(
-                                child: CircularProgressIndicator(),
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(13),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                          color: whiteColor),
+                                    )),
                               );
                             },
                           );
