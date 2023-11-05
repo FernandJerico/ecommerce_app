@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/data/datasources/auth_local_datasources.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bx.dart';
@@ -89,9 +92,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           const SizedBox(
             height: 20,
           ),
-          listMenu('assets/icons/logout.svg', 'Sign Out', () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, AppRoutes.login, (route) => false);
+          listMenu('assets/icons/logout.svg', 'Sign Out', () async {
+            await AuthLocalDatasource().removeAuthData();
+            Navigator.pushReplacementNamed(context, AppRoutes.login);
           }),
         ]),
       ),

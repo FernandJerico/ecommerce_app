@@ -13,6 +13,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +61,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               const SizedBox(
                 height: 40,
               ),
-              buildFormLogin(context, 'x x x x x x x x', 'email', (value) {}),
+              buildFormLogin(context, 'x x x x x x x x', 'email', (value) {},
+                  emailController),
               const SizedBox(
                 height: 35,
               ),

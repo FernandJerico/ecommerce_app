@@ -40,29 +40,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         OnboardingSecond(),
                         OnboardingThird(),
                       ]),
-
-                  // use dot indicator
-
-                  // Positioned(
-                  //   bottom: 140,
-                  //   child: DotsIndicator(
-                  //     position: state.page,
-                  //     dotsCount: 3,
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     decorator: DotsDecorator(
-                  //       color: greyColor1,
-                  //       activeColor: orangeColor,
-                  //       size: const Size.square(8.0),
-                  //       activeSize: const Size(32.0, 8.0),
-                  //       activeShape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(5.0),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  // use row
-
                   Positioned(
                     bottom: state.page == 0
                         ? sizes.height * 0.3

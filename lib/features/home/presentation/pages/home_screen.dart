@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisSpacing: 10, // Jarak antar kolom
                                 mainAxisSpacing: 10, // Jarak antar baris
                                 childAspectRatio:
-                                    0.8, // Perbandingan aspek antara lebar dan tinggi item
+                                    0.75, // Perbandingan aspek antara lebar dan tinggi item
                               ),
                               itemCount: productList.length,
                               itemBuilder: (context, index) {
