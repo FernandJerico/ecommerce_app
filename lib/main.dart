@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/data/datasources/auth_local_datasources.dart';
 import 'package:ecommerce_app/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ecommerce_app/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/forgot_password_screen.dart';
@@ -55,7 +56,16 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: AppRoutes.onboarding,
           routes: {
-            AppRoutes.onboarding: (context) => const OnboardingScreen(),
+            AppRoutes.onboarding: (context) => FutureBuilder(
+                  future: AuthLocalDatasource().isLogin(),
+                  builder: (context, snapshot) {
+                    if (snapshot.data != null && snapshot.data!) {
+                      return const InitialScreen();
+                    } else {
+                      return const OnboardingScreen();
+                    }
+                  },
+                ),
             AppRoutes.login: (context) => const LoginScreen(),
             AppRoutes.register: (context) => const RegisterScreen(),
             AppRoutes.forgotPassword: (context) => const ForgotPasswordScreen(),

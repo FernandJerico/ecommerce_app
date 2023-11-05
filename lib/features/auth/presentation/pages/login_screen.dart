@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/data/datasources/auth_local_datasources.dart';
 import 'package:ecommerce_app/features/auth/data/models/requests/login_request_model.dart';
 import 'package:ecommerce_app/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +140,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         listener: (context, state) {
                           state.maybeWhen(
                             orElse: () {},
-                            success: (data) {
+                            success: (data) async {
+                              AuthLocalDatasource().saveAuthData(data);
                               Navigator.pushReplacementNamed(
                                   context, AppRoutes.home);
                               ScaffoldMessenger.of(context).showSnackBar(
