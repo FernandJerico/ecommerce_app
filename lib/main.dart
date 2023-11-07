@@ -9,6 +9,7 @@ import 'package:ecommerce_app/features/auth/presentation/pages/register_screen.d
 import 'package:ecommerce_app/features/auth/presentation/pages/verification_code_screen.dart';
 import 'package:ecommerce_app/features/cart/presentation/pages/cart_screen.dart';
 import 'package:ecommerce_app/features/cart/presentation/pages/checkout_screen.dart';
+import 'package:ecommerce_app/features/home/presentation/bloc/products/products_bloc.dart';
 import 'package:ecommerce_app/features/home/presentation/pages/initial_screen.dart';
 import 'package:ecommerce_app/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:ecommerce_app/features/profile/presentation/pages/edit_profile_screen.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => HomeBloc(),
+          ),
+          BlocProvider(
+            create: (context) => ProductsBloc(),
           ),
         ],
         child: MaterialApp(
