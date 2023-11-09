@@ -7,6 +7,7 @@ import 'package:ecommerce_app/features/auth/presentation/pages/forgot_password_s
 import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/register_screen.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/verification_code_screen.dart';
+import 'package:ecommerce_app/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:ecommerce_app/features/cart/presentation/pages/cart_screen.dart';
 import 'package:ecommerce_app/features/cart/presentation/pages/checkout_screen.dart';
 import 'package:ecommerce_app/features/home/presentation/bloc/products/products_bloc.dart';
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 ProductsBloc()..add(const ProductsEvent.getAll()),
+          ),
+          BlocProvider(
+            create: (context) => CartBloc(),
           ),
         ],
         child: MaterialApp(

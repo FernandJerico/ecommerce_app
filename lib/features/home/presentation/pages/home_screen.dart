@@ -7,6 +7,7 @@ import 'package:ecommerce_app/features/navbar/presentation/pages/navbar_screen.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/lucide.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
@@ -14,6 +15,8 @@ import 'package:iconify_flutter/icons/ri.dart';
 import 'package:iconify_flutter/icons/tabler.dart';
 
 import '../../../../config/constants/variables.dart';
+import '../../../cart/data/model/cart_model.dart';
+import '../../../cart/presentation/bloc/cart/cart_bloc.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_widget.dart';
 
@@ -31,27 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'Tennis',
     'Football',
   ];
-
-  // List<ProductModel> productList = [
-  //   ProductModel(
-  //     imagePath: 'assets/images/nike-jordan.png',
-  //     name: 'Nike Fernand',
-  //     price: 302000,
-  //     isFavorited: false,
-  //   ),
-  //   ProductModel(
-  //     imagePath: 'assets/images/nike-air-max.png',
-  //     name: 'Nike Air Max',
-  //     price: 752000,
-  //     isFavorited: true,
-  //   ),
-  //   ProductModel(
-  //     imagePath: 'assets/images/nike-air-max.png',
-  //     name: 'Nike Air Max',
-  //     price: 752000,
-  //     isFavorited: true,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +103,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                       top: 0,
                                       right: 0,
                                       child: Container(
-                                        width: 10,
-                                        height: 10,
+                                        width: 16,
+                                        height: 16,
                                         decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: dangerColor),
+                                        child: BlocBuilder<CartBloc, CartState>(
+                                          builder: (context, state) {
+                                            return state.maybeWhen(
+                                              orElse: () {
+                                                return Text(
+                                                  '0',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.raleway(
+                                                      color: whiteColor,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 10),
+                                                );
+                                              },
+                                              loaded: (carts) {
+                                                int totalQty = 0;
+                                                for (var cart in carts) {
+                                                  totalQty += cart.qty;
+                                                }
+                                                return Text(
+                                                  totalQty.toString(),
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.raleway(
+                                                      color: whiteColor,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 10),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -329,7 +343,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   bottom: 0,
                                                   right: 0,
                                                   child: GestureDetector(
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                      context
+                                                          .read<CartBloc>()
+                                                          .add(CartEvent.add(
+                                                              Cart(
+                                                                  product:
+                                                                      product,
+                                                                  qty: 1)));
+                                                    },
                                                     child: Container(
                                                         height: 34,
                                                         width: 34,

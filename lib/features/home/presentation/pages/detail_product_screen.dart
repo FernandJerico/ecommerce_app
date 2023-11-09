@@ -2,9 +2,12 @@ import 'package:ecommerce_app/config/constants/variables.dart';
 import 'package:ecommerce_app/config/extensions/int_ext.dart';
 import 'package:ecommerce_app/features/home/data/model/responses/products_response_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../config/theme/theme.dart';
+import '../../../cart/data/model/cart_model.dart';
+import '../../../cart/presentation/bloc/cart/cart_bloc.dart';
 import '../../../cart/presentation/pages/cart_screen.dart';
 
 class DetailProductScreen extends StatefulWidget {
@@ -174,7 +177,15 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                       icon: SvgPicture.asset('assets/icons/heart.svg')),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<CartBloc>().add(
+                        CartEvent.add(Cart(product: widget.product, qty: 1)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CartScreen(),
+                        ));
+                  },
                   child: Container(
                     height: 50,
                     width: 210,
