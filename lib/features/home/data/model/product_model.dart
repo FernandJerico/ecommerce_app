@@ -1,10 +1,10 @@
-class Product {
+class ProductModel {
   final String imagePath;
   final String name;
   final double price;
   final bool isFavorited;
 
-  Product({
+  ProductModel({
     required this.imagePath,
     required this.name,
     required this.price,

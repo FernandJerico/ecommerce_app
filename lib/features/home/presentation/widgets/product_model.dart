@@ -1,11 +1,11 @@
 import 'package:ecommerce_app/config/extensions/int_ext.dart';
 
-class ProductModel {
+class Product {
   final List<String> images;
   final String name;
   final int price;
 
-  ProductModel({required this.images, required this.name, required this.price});
+  Product({required this.images, required this.name, required this.price});
 
   String get priceFormat => price.currencyFormatRp;
 }

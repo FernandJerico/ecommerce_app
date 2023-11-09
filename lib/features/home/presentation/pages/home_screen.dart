@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/config/extensions/int_ext.dart';
 import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/home/presentation/bloc/products/products_bloc.dart';
 import 'package:ecommerce_app/features/home/presentation/pages/detail_product_screen.dart';
 import 'package:ecommerce_app/features/navbar/presentation/pages/navbar_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +12,8 @@ import 'package:iconify_flutter/icons/lucide.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 import 'package:iconify_flutter/icons/tabler.dart';
-import 'package:intl/intl.dart';
 
-import '../../data/model/product_model.dart';
+import '../../../../config/constants/variables.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_widget.dart';
 
@@ -31,20 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
     'Football',
   ];
 
-  List<Product> productList = [
-    Product(
-      imagePath: 'assets/images/nike-jordan.png',
-      name: 'Nike Jordan',
-      price: 302000,
-      isFavorited: false,
-    ),
-    Product(
-      imagePath: 'assets/images/nike-air-max.png',
-      name: 'Nike Air Max',
-      price: 752000,
-      isFavorited: true,
-    ),
-  ];
+  // List<ProductModel> productList = [
+  //   ProductModel(
+  //     imagePath: 'assets/images/nike-jordan.png',
+  //     name: 'Nike Fernand',
+  //     price: 302000,
+  //     isFavorited: false,
+  //   ),
+  //   ProductModel(
+  //     imagePath: 'assets/images/nike-air-max.png',
+  //     name: 'Nike Air Max',
+  //     price: 752000,
+  //     isFavorited: true,
+  //   ),
+  //   ProductModel(
+  //     imagePath: 'assets/images/nike-air-max.png',
+  //     name: 'Nike Air Max',
+  //     price: 752000,
+  //     isFavorited: true,
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -222,114 +229,147 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 240,
                             width: MediaQuery.of(context).size.width,
-                            child: GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, // Jumlah kolom dalam grid
-                                crossAxisSpacing: 10, // Jarak antar kolom
-                                mainAxisSpacing: 10, // Jarak antar baris
-                                childAspectRatio:
-                                    0.75, // Perbandingan aspek antara lebar dan tinggi item
-                              ),
-                              itemCount: productList.length,
-                              itemBuilder: (context, index) {
-                                final product = productList[index];
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) {
-                                        return DetailProductScreen(
-                                          product: product,
+                            child: BlocBuilder<ProductsBloc, ProductsState>(
+                              builder: (context, state) {
+                                return state.maybeWhen(
+                                  orElse: () {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
+                                  loaded: (model) {
+                                    return ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: model.data.length,
+                                      itemBuilder: (context, index) {
+                                        final product = model.data[index];
+                                        return InkWell(
+                                          onTap: () {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                              builder: (context) {
+                                                return DetailProductScreen(
+                                                  product: product,
+                                                );
+                                              },
+                                            ));
+                                          },
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
+                                            margin: const EdgeInsets.only(
+                                                right: 10),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                            ),
+                                            child: Stack(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(12),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Iconify(
+                                                        Mdi.cards_heart,
+                                                        color: greyColor2,
+                                                        // product.isFavorited
+                                                        //     ? Mdi.cards_heart
+                                                        //     : Mdi
+                                                        //         .cards_heart_outline,
+                                                        // color:
+                                                        //     product.isFavorited
+                                                        //         ? dangerColor
+                                                        //         : greyColor2,
+                                                        // size: 18,
+                                                      ),
+                                                      Center(
+                                                        child: Image.network(
+                                                          '${Variables.baseUrl}${product.attributes.images.data.first.attributes.url}',
+                                                          height: 90,
+                                                          fit: BoxFit.contain,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 7),
+                                                      Text(
+                                                        'Best Seller',
+                                                        style: poppinsFontCustom(
+                                                            fontSize: 12,
+                                                            color: primaryColor,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      const SizedBox(height: 7),
+                                                      Text(
+                                                          product
+                                                              .attributes.name,
+                                                          style:
+                                                              ralewayFont16semiBold,
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
+                                                      const SizedBox(height: 7),
+                                                      Text(
+                                                          int.parse(product
+                                                                  .attributes
+                                                                  .price)
+                                                              .currencyFormatRp,
+                                                          style:
+                                                              poppinsFont14w500),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  bottom: 0,
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    onTap: () {},
+                                                    child: Container(
+                                                        height: 34,
+                                                        width: 34,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: primaryColor,
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          16),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          16)),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(6),
+                                                          child: Iconify(
+                                                            Tabler.plus,
+                                                            color: whiteColor,
+                                                          ),
+                                                        )),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
                                         );
                                       },
-                                    ));
+                                    );
                                   },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(12),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Iconify(
-                                                product.isFavorited
-                                                    ? Mdi.cards_heart
-                                                    : Mdi.cards_heart_outline,
-                                                color: product.isFavorited
-                                                    ? dangerColor
-                                                    : greyColor2,
-                                                size: 18,
-                                              ),
-                                              Center(
-                                                child: Image.asset(
-                                                  product.imagePath,
-                                                  height: 90,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                              const SizedBox(height: 7),
-                                              Text(
-                                                'Best Seller',
-                                                style: poppinsFontCustom(
-                                                    fontSize: 12,
-                                                    color: primaryColor,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              const SizedBox(height: 7),
-                                              Text(product.name,
-                                                  style: ralewayFont16semiBold),
-                                              const SizedBox(height: 7),
-                                              Text(
-                                                  NumberFormat.simpleCurrency(
-                                                          name: 'IDR')
-                                                      .format(product.price),
-                                                  style: poppinsFont14w500),
-                                            ],
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          right: 0,
-                                          child: GestureDetector(
-                                            onTap: () {},
-                                            child: Container(
-                                                height: 34,
-                                                width: 34,
-                                                decoration: BoxDecoration(
-                                                  color: primaryColor,
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  16),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  16)),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(6),
-                                                  child: Iconify(
-                                                    Tabler.plus,
-                                                    color: whiteColor,
-                                                  ),
-                                                )),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
                                 );
                               },
                             ),
+                          ),
+                          const SizedBox(
+                            height: 12,
                           ),
                           textSpaceBetween('New Arrivals',
                               ralewayFont16semiBold, 'See all', () {}),

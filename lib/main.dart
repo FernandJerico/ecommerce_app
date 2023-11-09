@@ -48,7 +48,8 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeBloc(),
           ),
           BlocProvider(
-            create: (context) => ProductsBloc(),
+            create: (context) =>
+                ProductsBloc()..add(const ProductsEvent.getAll()),
           ),
         ],
         child: MaterialApp(

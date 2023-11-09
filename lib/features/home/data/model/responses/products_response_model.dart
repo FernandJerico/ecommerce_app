@@ -1,5 +1,4 @@
-// ignore_for_file: constant_identifier_names
-
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class ProductsResponseModel {
@@ -61,7 +60,7 @@ class PurpleAttributes {
   final DateTime updatedAt;
   final DateTime publishedAt;
   final Images images;
-  final Categories categories;
+  // final Categories categories;
 
   PurpleAttributes({
     required this.name,
@@ -72,7 +71,7 @@ class PurpleAttributes {
     required this.updatedAt,
     required this.publishedAt,
     required this.images,
-    required this.categories,
+    // required this.categories,
   });
 
   factory PurpleAttributes.fromJson(String str) =>
@@ -90,7 +89,7 @@ class PurpleAttributes {
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
         images: Images.fromMap(json["images"]),
-        categories: Categories.fromMap(json["categories"]),
+        // categories: Categories.fromMap(json["categories"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -102,7 +101,7 @@ class PurpleAttributes {
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
         "images": images.toMap(),
-        "categories": categories.toMap(),
+        // "categories": categories.toMap(),
       };
 }
 
