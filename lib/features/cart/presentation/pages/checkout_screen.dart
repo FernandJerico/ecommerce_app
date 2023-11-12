@@ -43,7 +43,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       style: ralewayFont14w600Dark,
                     ),
                     buildContactInformation('assets/icons/chat.svg',
-                        'loremipsum@gmail.com', 'Email'),
+                        'fernandjerico@gmail.com', 'Email'),
                     buildContactInformation(
                         'assets/icons/call.svg', '+62821-39-488-953', 'Phone'),
                     const SizedBox(

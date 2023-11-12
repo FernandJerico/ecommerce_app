@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_app/features/cart/data/model/request/order_request_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,8 @@ import 'package:ecommerce_app/config/extensions/int_ext.dart';
 import '../../../../config/constants/variables.dart';
 import '../../../../config/theme/theme.dart';
 import '../../data/model/cart_model.dart';
+import '../bloc/order/order_bloc.dart';
+import '../pages/payment_screen.dart';
 
 AppBar buildAppBar(BuildContext context) {
   return AppBar(
@@ -298,8 +301,34 @@ Widget buildButtonCheckout(
   );
 }
 
+Widget buildButtonCartCheckout(
+    BuildContext context, String buttonName, VoidCallback onPressed) {
+  return SizedBox(
+    width: MediaQuery.of(context).size.width,
+    height: 50,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primaryColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(13),
+          ),
+        ),
+      ),
+      onPressed: onPressed,
+      child: Text(
+        buttonName,
+        style: ralewayFont14w600,
+      ),
+    ),
+  );
+}
+
 Positioned buildPositionedBottomCheckout(
     BuildContext context, VoidCallback onPressed) {
+  List<Item> items = [];
+  int localtotalPrice = 0;
+  int localpriceDelivery = 0;
   return Positioned(
     bottom: 0,
     left: 0,
@@ -322,6 +351,16 @@ Positioned buildPositionedBottomCheckout(
                     totalPrice += int.parse(element.product.attributes.price) *
                         element.qty;
                   }
+                  localtotalPrice = totalPrice;
+                  items = carts
+                      .map(
+                        (e) => Item(
+                            id: e.product.id,
+                            productName: e.product.attributes.name,
+                            price: int.parse(e.product.attributes.price),
+                            qty: e.qty),
+                      )
+                      .toList();
                   return buildTextCart('Subtotal', totalPrice.currencyFormatRp);
                 },
               );
@@ -341,6 +380,7 @@ Positioned buildPositionedBottomCheckout(
                   for (var element in carts) {
                     priceDelivery += 9000 * element.qty;
                   }
+                  localpriceDelivery = priceDelivery;
                   return buildTextCart(
                       'Delivery', priceDelivery.currencyFormatRp);
                 },
@@ -379,7 +419,50 @@ Positioned buildPositionedBottomCheckout(
           const SizedBox(
             height: 20,
           ),
-          buildButtonCheckout(context, 'Checkout', onPressed)
+          BlocConsumer<OrderBloc, OrderState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                orElse: () {},
+                success: (request) {
+                  context.read<CartBloc>().add(const CartEvent.started());
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return PaymentScreen(
+                        invoiceUrl: request.invoiceUrl,
+                        orderId: request.externalId,
+                      );
+                    },
+                  ));
+                },
+              );
+            },
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return buildButtonCheckout(
+                    context,
+                    'Checkout',
+                    () {
+                      context.read<OrderBloc>().add(
+                            OrderEvent.order(
+                              OrderRequestModel(
+                                data: Data(
+                                    items: items,
+                                    totalPrice: localtotalPrice,
+                                    deliveryAddress: 'Rungkut, Kota Suarabaya',
+                                    courierName: 'Afif Maaruf',
+                                    courierPrice: localpriceDelivery,
+                                    status: 'waiting-payment'),
+                              ),
+                            ),
+                          );
+                    },
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+              );
+            },
+          )
         ]),
       ),
     ),

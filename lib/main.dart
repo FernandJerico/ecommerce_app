@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/cart/presentation/bloc/order/order_bloc.dart';
+import 'features/cart/presentation/bloc/order_detail/order_detail_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'features/profile/presentation/pages/profile_screen.dart';
@@ -55,6 +57,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => CartBloc(),
           ),
+          BlocProvider(
+            create: (context) => OrderBloc(),
+          ),
+          BlocProvider(
+            create: (context) => OrderDetailBloc(),
+          ),
         ],
         child: MaterialApp(
           title: 'Nike App',
@@ -83,6 +91,7 @@ class MyApp extends StatelessWidget {
             AppRoutes.home: (context) => const InitialScreen(),
             AppRoutes.cart: (context) => const CartScreen(),
             AppRoutes.checkout: (context) => const CheckoutScreen(),
+            // AppRoutes.payment: (context) => const PaymentScreen(),
             AppRoutes.profile: (context) => const ProfileScreen(),
             AppRoutes.editProfile: (context) => const EditProfileScreen(),
           },
