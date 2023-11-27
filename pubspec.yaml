@@ -50,6 +50,7 @@ dependencies:
   bloc: ^8.1.2
   shared_preferences: ^2.2.2
   webview_flutter: ^4.4.2
+  another_stepper: ^1.2.2
 
 flutter_native_splash:
   android: true

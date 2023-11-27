@@ -26,6 +26,7 @@ import 'features/cart/presentation/bloc/order/order_bloc.dart';
 import 'features/cart/presentation/bloc/order_detail/order_detail_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'features/order/presentation/pages/order_screen.dart';
 import 'features/profile/presentation/pages/profile_screen.dart';
 import 'features/shipping/presentation/bloc/city/city_bloc.dart';
 import 'features/shipping/presentation/bloc/province/province_bloc.dart';
@@ -118,6 +119,7 @@ class MyApp extends StatelessWidget {
             // AppRoutes.payment: (context) => const PaymentScreen(),
             AppRoutes.profile: (context) => const ProfileScreen(),
             AppRoutes.editProfile: (context) => const EditProfileScreen(),
+            AppRoutes.order: (context) => const OrderScreen(),
           },
         ));
   }

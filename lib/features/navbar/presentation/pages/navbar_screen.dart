@@ -72,7 +72,9 @@ class _NavbarScreenState extends State<NavbarScreen> {
                         width: sizes.width * 0.20,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.order);
+                        },
                         icon: SvgPicture.asset('assets/icons/notification.svg'),
                       ),
                       IconButton(
