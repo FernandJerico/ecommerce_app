@@ -1,5 +1,3 @@
-// ignore: unused_import, depend_on_referenced_packages
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class ProductsResponseModel {
@@ -61,7 +59,6 @@ class PurpleAttributes {
   final DateTime updatedAt;
   final DateTime publishedAt;
   final Images images;
-  // final Categories categories;
 
   PurpleAttributes({
     required this.name,
@@ -72,7 +69,6 @@ class PurpleAttributes {
     required this.updatedAt,
     required this.publishedAt,
     required this.images,
-    // required this.categories,
   });
 
   factory PurpleAttributes.fromJson(String str) =>
@@ -90,7 +86,6 @@ class PurpleAttributes {
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
         images: Images.fromMap(json["images"]),
-        // categories: Categories.fromMap(json["categories"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -102,92 +97,6 @@ class PurpleAttributes {
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
         "images": images.toMap(),
-        // "categories": categories.toMap(),
-      };
-}
-
-class Categories {
-  final List<CategoriesDatum> data;
-
-  Categories({
-    required this.data,
-  });
-
-  factory Categories.fromJson(String str) =>
-      Categories.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Categories.fromMap(Map<String, dynamic> json) => Categories(
-        data: List<CategoriesDatum>.from(
-            json["data"].map((x) => CategoriesDatum.fromMap(x))),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "data": List<dynamic>.from(data.map((x) => x.toMap())),
-      };
-}
-
-class CategoriesDatum {
-  final int id;
-  final FluffyAttributes attributes;
-
-  CategoriesDatum({
-    required this.id,
-    required this.attributes,
-  });
-
-  factory CategoriesDatum.fromJson(String str) =>
-      CategoriesDatum.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory CategoriesDatum.fromMap(Map<String, dynamic> json) => CategoriesDatum(
-        id: json["id"],
-        attributes: FluffyAttributes.fromMap(json["attributes"]),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "attributes": attributes.toMap(),
-      };
-}
-
-class FluffyAttributes {
-  final String name;
-  final String description;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final DateTime publishedAt;
-
-  FluffyAttributes({
-    required this.name,
-    required this.description,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.publishedAt,
-  });
-
-  factory FluffyAttributes.fromJson(String str) =>
-      FluffyAttributes.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory FluffyAttributes.fromMap(Map<String, dynamic> json) =>
-      FluffyAttributes(
-        name: json["name"],
-        description: json["description"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        publishedAt: DateTime.parse(json["publishedAt"]),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "name": name,
-        "description": description,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "publishedAt": publishedAt.toIso8601String(),
       };
 }
 
@@ -214,7 +123,7 @@ class Images {
 
 class ImagesDatum {
   final int id;
-  final TentacledAttributes attributes;
+  final FluffyAttributes attributes;
 
   ImagesDatum({
     required this.id,
@@ -228,7 +137,7 @@ class ImagesDatum {
 
   factory ImagesDatum.fromMap(Map<String, dynamic> json) => ImagesDatum(
         id: json["id"],
-        attributes: TentacledAttributes.fromMap(json["attributes"]),
+        attributes: FluffyAttributes.fromMap(json["attributes"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -237,7 +146,7 @@ class ImagesDatum {
       };
 }
 
-class TentacledAttributes {
+class FluffyAttributes {
   final String name;
   final dynamic alternativeText;
   final dynamic caption;
@@ -255,7 +164,7 @@ class TentacledAttributes {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  TentacledAttributes({
+  FluffyAttributes({
     required this.name,
     required this.alternativeText,
     required this.caption,
@@ -274,13 +183,13 @@ class TentacledAttributes {
     required this.updatedAt,
   });
 
-  factory TentacledAttributes.fromJson(String str) =>
-      TentacledAttributes.fromMap(json.decode(str));
+  factory FluffyAttributes.fromJson(String str) =>
+      FluffyAttributes.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory TentacledAttributes.fromMap(Map<String, dynamic> json) =>
-      TentacledAttributes(
+  factory FluffyAttributes.fromMap(Map<String, dynamic> json) =>
+      FluffyAttributes(
         name: json["name"],
         alternativeText: json["alternativeText"],
         caption: json["caption"],
@@ -319,21 +228,21 @@ class TentacledAttributes {
       };
 }
 
-enum Ext { JPG }
+enum Ext { JPEG, JPG }
 
-final extValues = EnumValues({".jpg": Ext.JPG});
+final extValues = EnumValues({".jpeg": Ext.JPEG, ".JPG": Ext.JPG});
 
 class Formats {
   final Large thumbnail;
-  final Large large;
   final Large medium;
   final Large small;
+  final Large large;
 
   Formats({
     required this.thumbnail,
-    required this.large,
     required this.medium,
     required this.small,
+    required this.large,
   });
 
   factory Formats.fromJson(String str) => Formats.fromMap(json.decode(str));
@@ -342,16 +251,16 @@ class Formats {
 
   factory Formats.fromMap(Map<String, dynamic> json) => Formats(
         thumbnail: Large.fromMap(json["thumbnail"]),
-        large: Large.fromMap(json["large"]),
         medium: Large.fromMap(json["medium"]),
         small: Large.fromMap(json["small"]),
+        large: Large.fromMap(json["large"]),
       );
 
   Map<String, dynamic> toMap() => {
         "thumbnail": thumbnail.toMap(),
-        "large": large.toMap(),
         "medium": medium.toMap(),
         "small": small.toMap(),
+        "large": large.toMap(),
       };
 }
 

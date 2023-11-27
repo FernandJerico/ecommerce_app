@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_app/config/routes/app_routes.dart';
 import 'package:ecommerce_app/features/cart/data/model/request/order_request_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:ecommerce_app/config/extensions/int_ext.dart';
 import '../../../../config/constants/variables.dart';
 import '../../../../config/theme/theme.dart';
 import '../../data/model/cart_model.dart';
+import '../bloc/get_cost/get_cost_bloc.dart';
 import '../bloc/order/order_bloc.dart';
 import '../pages/payment_screen.dart';
 
@@ -31,6 +33,26 @@ AppBar buildAppBar(BuildContext context) {
     centerTitle: true,
     title: Text(
       'My Cart',
+      style: ralewayFont16semiBold,
+    ),
+  );
+}
+
+AppBar buildAppBarAddress(BuildContext context) {
+  return AppBar(
+    elevation: 0,
+    titleSpacing: 0,
+    leadingWidth: 50,
+    backgroundColor: greyColor1,
+    leading: IconButton(
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          size: 18,
+        )),
+    centerTitle: true,
+    title: Text(
+      'Add Address',
       style: ralewayFont16semiBold,
     ),
   );
@@ -278,7 +300,7 @@ Row buildPaymentMethod(String imagePath, String name, String cardNumber) {
   );
 }
 
-Widget buildButtonCheckout(
+Widget buildButtonCartCheckout(
     BuildContext context, String buttonName, VoidCallback onPressed) {
   return SizedBox(
     width: MediaQuery.of(context).size.width,
@@ -301,7 +323,94 @@ Widget buildButtonCheckout(
   );
 }
 
-Widget buildButtonCartCheckout(
+Positioned buildPositionedBottomCartCheckout(
+    BuildContext context, VoidCallback onPressed) {
+  return Positioned(
+    bottom: 0,
+    left: 0,
+    child: Container(
+      height: 230,
+      width: MediaQuery.of(context).size.width,
+      color: whiteColor,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 28),
+        child: Column(children: [
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return buildTextCart('Subtotal', 0.currencyFormatRp);
+                },
+                loaded: (carts) {
+                  int totalPrice = 0;
+                  for (var element in carts) {
+                    totalPrice += int.parse(element.product.attributes.price) *
+                        element.qty;
+                  }
+                  carts
+                      .map(
+                        (e) => Item(
+                            id: e.product.id,
+                            productName: e.product.attributes.name,
+                            price: int.parse(e.product.attributes.price),
+                            qty: e.qty),
+                      )
+                      .toList();
+                  return buildTextCart('Subtotal', totalPrice.currencyFormatRp);
+                },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return buildTextCart('Delivery', '-');
+                },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          buildDivider(context),
+          const SizedBox(
+            height: 15,
+          ),
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return buildTotalCost('Total Cost', 0.currencyFormatRp);
+                },
+                loaded: (carts) {
+                  int totalPrice = 0;
+                  for (var element in carts) {
+                    totalPrice += int.parse(element.product.attributes.price) *
+                        element.qty;
+                  }
+                  return buildTotalCost(
+                      'Total Cost', totalPrice.currencyFormatRp);
+                },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          buildButtonCartCheckout(context, 'Checkout', () {
+            Navigator.pushNamed(context, AppRoutes.checkout);
+          })
+        ]),
+      ),
+    ),
+  );
+}
+
+Widget buildButtonCheckout(
     BuildContext context, String buttonName, VoidCallback onPressed) {
   return SizedBox(
     width: MediaQuery.of(context).size.width,
@@ -369,20 +478,22 @@ Positioned buildPositionedBottomCheckout(
           const SizedBox(
             height: 10,
           ),
-          BlocBuilder<CartBloc, CartState>(
+          BlocBuilder<GetCostBloc, GetCostState>(
             builder: (context, state) {
               return state.maybeWhen(
                 orElse: () {
                   return buildTextCart('Delivery', 0.currencyFormatRp);
                 },
-                loaded: (carts) {
-                  int priceDelivery = 0;
-                  for (var element in carts) {
-                    priceDelivery += 9000 * element.qty;
-                  }
-                  localpriceDelivery = priceDelivery;
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                loaded: (cost) {
                   return buildTextCart(
-                      'Delivery', priceDelivery.currencyFormatRp);
+                      'Delivery',
+                      cost.rajaongkir.results.first.costs.first.cost.first.value
+                          .currencyFormatRp);
                 },
               );
             },

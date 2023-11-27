@@ -164,10 +164,10 @@ class AvailableBank {
       };
 }
 
-enum AccountHolderName { NANREFF_STORE }
+enum AccountHolderName { ENLIGHT }
 
 final accountHolderNameValues =
-    EnumValues({"NANREFF STORE": AccountHolderName.NANREFF_STORE});
+    EnumValues({"ENLIGHT": AccountHolderName.ENLIGHT});
 
 enum BankBranch { VIRTUAL_ACCOUNT }
 

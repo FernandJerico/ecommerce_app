@@ -30,9 +30,27 @@ class _CartScreenState extends State<CartScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  '1 Item',
-                  style: poppinsFont16w500,
+                BlocBuilder<CartBloc, CartState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () {
+                        return Text(
+                          '0 Item',
+                          style: poppinsFont16w500,
+                        );
+                      },
+                      loaded: (carts) {
+                        int totalQty = 0;
+                        for (var cart in carts) {
+                          totalQty += cart.qty;
+                        }
+                        return Text(
+                          '$totalQty Item',
+                          style: poppinsFont16w500,
+                        );
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 10,
@@ -67,7 +85,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
-          buildPositionedBottomCheckout(
+          buildPositionedBottomCartCheckout(
             context,
             () => Navigator.pushNamed(context, AppRoutes.checkout),
           )
