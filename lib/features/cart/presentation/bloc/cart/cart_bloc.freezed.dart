@@ -21,6 +21,7 @@ mixin _$CartEvent {
     required TResult Function() started,
     required TResult Function(Cart cart) add,
     required TResult Function(Cart cart) remove,
+    required TResult Function(Cart cart) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$CartEvent {
     TResult? Function()? started,
     TResult? Function(Cart cart)? add,
     TResult? Function(Cart cart)? remove,
+    TResult? Function(Cart cart)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$CartEvent {
     TResult Function()? started,
     TResult Function(Cart cart)? add,
     TResult Function(Cart cart)? remove,
+    TResult Function(Cart cart)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$CartEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_Add value) add,
     required TResult Function(_Remove value) remove,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$CartEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_Add value)? add,
     TResult? Function(_Remove value)? remove,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$CartEvent {
     TResult Function(_Started value)? started,
     TResult Function(_Add value)? add,
     TResult Function(_Remove value)? remove,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(Cart cart) add,
     required TResult Function(Cart cart) remove,
+    required TResult Function(Cart cart) delete,
   }) {
     return started();
   }
@@ -130,6 +137,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(Cart cart)? add,
     TResult? Function(Cart cart)? remove,
+    TResult? Function(Cart cart)? delete,
   }) {
     return started?.call();
   }
@@ -140,6 +148,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(Cart cart)? add,
     TResult Function(Cart cart)? remove,
+    TResult Function(Cart cart)? delete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -154,6 +163,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_Add value) add,
     required TResult Function(_Remove value) remove,
+    required TResult Function(_Delete value) delete,
   }) {
     return started(this);
   }
@@ -164,6 +174,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_Add value)? add,
     TResult? Function(_Remove value)? remove,
+    TResult? Function(_Delete value)? delete,
   }) {
     return started?.call(this);
   }
@@ -174,6 +185,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_Add value)? add,
     TResult Function(_Remove value)? remove,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -252,6 +264,7 @@ class _$AddImpl implements _Add {
     required TResult Function() started,
     required TResult Function(Cart cart) add,
     required TResult Function(Cart cart) remove,
+    required TResult Function(Cart cart) delete,
   }) {
     return add(cart);
   }
@@ -262,6 +275,7 @@ class _$AddImpl implements _Add {
     TResult? Function()? started,
     TResult? Function(Cart cart)? add,
     TResult? Function(Cart cart)? remove,
+    TResult? Function(Cart cart)? delete,
   }) {
     return add?.call(cart);
   }
@@ -272,6 +286,7 @@ class _$AddImpl implements _Add {
     TResult Function()? started,
     TResult Function(Cart cart)? add,
     TResult Function(Cart cart)? remove,
+    TResult Function(Cart cart)? delete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -286,6 +301,7 @@ class _$AddImpl implements _Add {
     required TResult Function(_Started value) started,
     required TResult Function(_Add value) add,
     required TResult Function(_Remove value) remove,
+    required TResult Function(_Delete value) delete,
   }) {
     return add(this);
   }
@@ -296,6 +312,7 @@ class _$AddImpl implements _Add {
     TResult? Function(_Started value)? started,
     TResult? Function(_Add value)? add,
     TResult? Function(_Remove value)? remove,
+    TResult? Function(_Delete value)? delete,
   }) {
     return add?.call(this);
   }
@@ -306,6 +323,7 @@ class _$AddImpl implements _Add {
     TResult Function(_Started value)? started,
     TResult Function(_Add value)? add,
     TResult Function(_Remove value)? remove,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -391,6 +409,7 @@ class _$RemoveImpl implements _Remove {
     required TResult Function() started,
     required TResult Function(Cart cart) add,
     required TResult Function(Cart cart) remove,
+    required TResult Function(Cart cart) delete,
   }) {
     return remove(cart);
   }
@@ -401,6 +420,7 @@ class _$RemoveImpl implements _Remove {
     TResult? Function()? started,
     TResult? Function(Cart cart)? add,
     TResult? Function(Cart cart)? remove,
+    TResult? Function(Cart cart)? delete,
   }) {
     return remove?.call(cart);
   }
@@ -411,6 +431,7 @@ class _$RemoveImpl implements _Remove {
     TResult Function()? started,
     TResult Function(Cart cart)? add,
     TResult Function(Cart cart)? remove,
+    TResult Function(Cart cart)? delete,
     required TResult orElse(),
   }) {
     if (remove != null) {
@@ -425,6 +446,7 @@ class _$RemoveImpl implements _Remove {
     required TResult Function(_Started value) started,
     required TResult Function(_Add value) add,
     required TResult Function(_Remove value) remove,
+    required TResult Function(_Delete value) delete,
   }) {
     return remove(this);
   }
@@ -435,6 +457,7 @@ class _$RemoveImpl implements _Remove {
     TResult? Function(_Started value)? started,
     TResult? Function(_Add value)? add,
     TResult? Function(_Remove value)? remove,
+    TResult? Function(_Delete value)? delete,
   }) {
     return remove?.call(this);
   }
@@ -445,6 +468,7 @@ class _$RemoveImpl implements _Remove {
     TResult Function(_Started value)? started,
     TResult Function(_Add value)? add,
     TResult Function(_Remove value)? remove,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (remove != null) {
@@ -460,6 +484,151 @@ abstract class _Remove implements CartEvent {
   Cart get cart;
   @JsonKey(ignore: true)
   _$$RemoveImplCopyWith<_$RemoveImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteImplCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Cart cart});
+}
+
+/// @nodoc
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cart = null,
+  }) {
+    return _then(_$DeleteImpl(
+      null == cart
+          ? _value.cart
+          : cart // ignore: cast_nullable_to_non_nullable
+              as Cart,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImpl implements _Delete {
+  const _$DeleteImpl(this.cart);
+
+  @override
+  final Cart cart;
+
+  @override
+  String toString() {
+    return 'CartEvent.delete(cart: $cart)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteImpl &&
+            (identical(other.cart, cart) || other.cart == cart));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, cart);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Cart cart) add,
+    required TResult Function(Cart cart) remove,
+    required TResult Function(Cart cart) delete,
+  }) {
+    return delete(cart);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Cart cart)? add,
+    TResult? Function(Cart cart)? remove,
+    TResult? Function(Cart cart)? delete,
+  }) {
+    return delete?.call(cart);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Cart cart)? add,
+    TResult Function(Cart cart)? remove,
+    TResult Function(Cart cart)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(cart);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Remove value) remove,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Add value)? add,
+    TResult? Function(_Remove value)? remove,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Add value)? add,
+    TResult Function(_Remove value)? remove,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements CartEvent {
+  const factory _Delete(final Cart cart) = _$DeleteImpl;
+
+  Cart get cart;
+  @JsonKey(ignore: true)
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

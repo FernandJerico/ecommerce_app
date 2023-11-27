@@ -38,6 +38,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
     });
 
+    on<_Delete>((event, emit) {
+      final currentState = state as _Loaded;
+
+      // Temukan indeks produk yang akan dihapus
+      final index = currentState.carts
+          .indexWhere((element) => element.product.id == event.cart.product.id);
+
+      if (index >= 0) {
+        // Buat salinan list yang dapat diubah
+        final List<Cart> updatedCarts = List.from(currentState.carts);
+
+        // Hapus produk dari keranjang pada salinan list
+        updatedCarts.removeAt(index);
+
+        emit(const _Loading());
+        emit(_Loaded(updatedCarts));
+      }
+    });
+
     on<_Started>((event, emit) {
       emit(const _Loading());
       emit(const _Loaded([]));

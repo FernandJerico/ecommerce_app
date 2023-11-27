@@ -146,7 +146,10 @@ class _ListProductCartState extends State<ListProductCart> {
                 ),
               ),
             ),
-            onTap: (handler) {}),
+            onTap: (handler) {
+              context.read<CartBloc>().add(CartEvent.delete(widget.item));
+              handler(true);
+            }),
       ],
       child: Container(
         height: 104,
@@ -323,6 +326,20 @@ Widget buildButtonCartCheckout(
   );
 }
 
+Widget buildButtonCartCheckoutDisabled(
+    BuildContext context, String buttonName) {
+  return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      decoration: BoxDecoration(
+        color: greyColor2,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(13),
+        ),
+      ),
+      child: Center(child: Text(buttonName, style: ralewayFont14w600)));
+}
+
 Positioned buildPositionedBottomCartCheckout(
     BuildContext context, VoidCallback onPressed) {
   return Positioned(
@@ -401,9 +418,22 @@ Positioned buildPositionedBottomCartCheckout(
           const SizedBox(
             height: 20,
           ),
-          buildButtonCartCheckout(context, 'Checkout', () {
-            Navigator.pushNamed(context, AppRoutes.checkout);
-          })
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              return state.maybeWhen(orElse: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }, loaded: (cart) {
+                if (cart.isEmpty) {
+                  return buildButtonCartCheckoutDisabled(context, 'Checkout');
+                }
+                return buildButtonCartCheckout(context, 'Checkout', () {
+                  Navigator.pushNamed(context, AppRoutes.checkout);
+                });
+              });
+            },
+          )
         ]),
       ),
     ),
