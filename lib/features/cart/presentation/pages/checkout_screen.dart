@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/config/components/custom_dropdown.dart';
 import 'package:ecommerce_app/config/extensions/int_ext.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/auth/data/datasources/auth_local_datasources.dart';
 import 'package:ecommerce_app/features/cart/presentation/bloc/get_cost/get_cost_bloc.dart';
 import 'package:ecommerce_app/features/shipping/presentation/bloc/get_address/get_address_bloc.dart';
 import 'package:ecommerce_app/features/shipping/presentation/pages/address_screen.dart';
@@ -32,6 +33,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   int localtotalPrice = 0;
   int localpriceDelivery = 0;
   int idAddress = 0;
+  String courierName = 'jne';
+  int courierPrice = 0;
+  String deliveryAddress = 'Rungkut, Kota Surabaya';
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +98,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   orElse: () => response.data.first,
                                 )
                               : response.data.last;
+                          deliveryAddress = address.attributes.address;
                           context.read<GetCostBloc>().add(
                                 GetCostEvent.getCost(
                                     origin: subdistrictOrigin,
@@ -183,11 +188,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               items: couriers,
                               label: 'Kurir',
                               onChanged: (value) {
+                                courierName = value!.code;
                                 context.read<GetCostBloc>().add(
                                     GetCostEvent.getCost(
                                         origin: subdistrictOrigin,
                                         destination: idAddress.toString(),
-                                        courier: value!.code));
+                                        courier: value.code));
                               },
                             ),
 
@@ -258,6 +264,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           );
                         },
                         loaded: (cost) {
+                          courierPrice = cost.rajaongkir.results.first.costs
+                              .first.cost.first.value;
                           return buildTextCart(
                               'Delivery',
                               cost.rajaongkir.results.first.costs.first.cost
@@ -331,21 +339,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           return buildButtonCheckout(
                             context,
                             'Checkout',
-                            () {
-                              context.read<OrderBloc>().add(
-                                    OrderEvent.order(
-                                      OrderRequestModel(
-                                        data: Data(
+                            () async {
+                              final user =
+                                  await AuthLocalDatasource().getUser();
+                              if (context.mounted) {
+                                context.read<OrderBloc>().add(
+                                      OrderEvent.order(
+                                        OrderRequestModel(
+                                          data: Data(
                                             items: items,
                                             totalPrice: localtotalPrice,
-                                            deliveryAddress:
-                                                'Rungkut, Kota Suarabaya',
-                                            courierName: 'Afif Maaruf',
-                                            courierPrice: localpriceDelivery,
-                                            status: 'waiting-payment'),
+                                            deliveryAddress: deliveryAddress,
+                                            courierName: courierName,
+                                            courierPrice: courierPrice,
+                                            status: 'waiting-payment',
+                                            buyerId: user.id.toString(),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                              }
                             },
                           );
                         },

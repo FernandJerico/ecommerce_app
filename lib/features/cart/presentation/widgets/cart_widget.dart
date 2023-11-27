@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ecommerce_app/config/routes/app_routes.dart';
+import 'package:ecommerce_app/features/auth/data/datasources/auth_local_datasources.dart';
 import 'package:ecommerce_app/features/cart/data/model/request/order_request_model.dart';
 import 'package:ecommerce_app/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:flutter/material.dart';
@@ -583,20 +584,25 @@ Positioned buildPositionedBottomCheckout(
                   return buildButtonCheckout(
                     context,
                     'Checkout',
-                    () {
-                      context.read<OrderBloc>().add(
-                            OrderEvent.order(
-                              OrderRequestModel(
-                                data: Data(
-                                    items: items,
-                                    totalPrice: localtotalPrice,
-                                    deliveryAddress: 'Rungkut, Kota Suarabaya',
-                                    courierName: 'Afif Maaruf',
-                                    courierPrice: localpriceDelivery,
-                                    status: 'waiting-payment'),
+                    () async {
+                      final user = await AuthLocalDatasource().getUser();
+                      if (context.mounted) {
+                        context.read<OrderBloc>().add(
+                              OrderEvent.order(
+                                OrderRequestModel(
+                                  data: Data(
+                                      items: items,
+                                      totalPrice: localtotalPrice,
+                                      deliveryAddress:
+                                          'Rungkut, Kota Suarabaya',
+                                      courierName: 'Afif Maaruf',
+                                      courierPrice: localpriceDelivery,
+                                      status: 'waiting-payment',
+                                      buyerId: user.id.toString()),
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                      }
                     },
                   );
                 },
