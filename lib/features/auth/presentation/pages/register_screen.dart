@@ -1,4 +1,7 @@
 import 'package:ecommerce_app/config/routes/app_routes.dart';
+import 'package:ecommerce_app/features/auth/data/models/requests/register_request_model.dart';
+import 'package:ecommerce_app/features/auth/presentation/bloc/register/register_bloc.dart';
+import 'package:ecommerce_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +18,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
@@ -82,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               buildFormLogin(context, 'xxxxxxxx', 'text',
                                   (value) {
                                 context.read<AuthBloc>().add(NameEvent(value));
-                              }),
+                              }, nameController),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -97,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   context, 'loremipsum@gmail.com', 'email',
                                   (value) {
                                 context.read<AuthBloc>().add(EmailEvent(value));
-                              }),
+                              }, emailController),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -114,19 +120,79 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context
                                     .read<AuthBloc>()
                                     .add(PasswordEvent(value));
-                              }),
+                              }, passwordController),
                             ],
                           )),
                       const SizedBox(
                         height: 35,
                       ),
-                      buildButton(
-                        context,
-                        'Sign Up',
-                        () {
-                          if (formKey.currentState!.validate()) {
-                            Navigator.pop(context);
-                          }
+                      BlocConsumer<RegisterBloc, RegisterState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            orElse: () {},
+                            success: (data) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Register Success!'),
+                                backgroundColor: Colors.green,
+                              ));
+                            },
+                            error: (message) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(message),
+                                backgroundColor: Colors.grey,
+                              ));
+                            },
+                          );
+                        },
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () {
+                              return buildButton(
+                                context,
+                                'Sign Up',
+                                () {
+                                  if (formKey.currentState!.validate()) {
+                                    final data = RegisterRequestModel(
+                                        name: nameController.text,
+                                        password: passwordController.text,
+                                        email: emailController.text,
+                                        username: nameController.text
+                                            .replaceAll(' ', ''));
+                                    context
+                                        .read<RegisterBloc>()
+                                        .add(RegisterEvent.register(data));
+                                  }
+                                },
+                              );
+                            },
+                            loading: () {
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(13),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                          color: whiteColor),
+                                    )),
+                              );
+                            },
+                          );
                         },
                       ),
                       const SizedBox(

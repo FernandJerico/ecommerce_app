@@ -42,7 +42,9 @@ class _NavbarScreenState extends State<NavbarScreen> {
                         )
                       ]),
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.cart);
+                    },
                     shape: const CircleBorder(),
                     backgroundColor: primaryColor,
                     child: SvgPicture.asset(
@@ -70,7 +72,9 @@ class _NavbarScreenState extends State<NavbarScreen> {
                         width: sizes.width * 0.20,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.order);
+                        },
                         icon: SvgPicture.asset('assets/icons/notification.svg'),
                       ),
                       IconButton(

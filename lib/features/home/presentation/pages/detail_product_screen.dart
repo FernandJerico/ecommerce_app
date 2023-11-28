@@ -1,10 +1,14 @@
+import 'package:ecommerce_app/config/constants/variables.dart';
+import 'package:ecommerce_app/config/extensions/int_ext.dart';
+import 'package:ecommerce_app/features/home/data/model/responses/products_response_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../config/theme/theme.dart';
+import '../../../cart/data/model/cart_model.dart';
+import '../../../cart/presentation/bloc/cart/cart_bloc.dart';
 import '../../../cart/presentation/pages/cart_screen.dart';
-import '../../data/model/product_model.dart';
 
 class DetailProductScreen extends StatefulWidget {
   final Product product;
@@ -85,7 +89,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 20,
             ),
             Text(
-              widget.product.name,
+              widget.product.attributes.name,
               style: ralewayFont26Bold,
             ),
             const SizedBox(
@@ -98,9 +102,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             const SizedBox(
               height: 10,
             ),
-            Text(
-                NumberFormat.simpleCurrency(name: 'IDR')
-                    .format(widget.product.price),
+            Text(int.parse(widget.product.attributes.price).currencyFormatRp,
                 style: poppinsFont24semiBold),
             const SizedBox(
               height: 10,
@@ -118,8 +120,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                   ],
                 ),
                 Center(
-                  child: Image.asset(
-                    widget.product.imagePath,
+                  child: Image.network(
+                    '${Variables.baseUrl}${widget.product.attributes.images.data.first.attributes.url}',
                     height: 170,
                   ),
                 ),
@@ -130,18 +132,19 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             ),
             Row(
               children: [
-                variantProduct(widget.product.imagePath),
-                variantProduct('assets/images/nike-1.png'),
-                variantProduct('assets/images/nike-2.png'),
-                variantProduct('assets/images/nike-3.png'),
-                variantProduct('assets/images/nike-4.png'),
+                variantProduct(
+                    '${Variables.baseUrl}${widget.product.attributes.images.data.first.attributes.url}'),
+                // variantProduct('assets/images/nike-1.png'),
+                // variantProduct('assets/images/nike-2.png'),
+                // variantProduct('assets/images/nike-3.png'),
+                // variantProduct('assets/images/nike-4.png'),
               ],
             ),
             const SizedBox(
               height: 20,
             ),
             Text(
-              'The ${widget.product.name} unit delivers unrivaled, all-day comfort. The sleek, running-inspired design roots you to everything Nike........',
+              '${widget.product.attributes.name}\n\nDescription Product:\n${widget.product.attributes.description}',
               style: poppinsFont14w500,
             ),
             const SizedBox(
@@ -174,7 +177,15 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                       icon: SvgPicture.asset('assets/icons/heart.svg')),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<CartBloc>().add(
+                        CartEvent.add(Cart(product: widget.product, qty: 1)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CartScreen(),
+                        ));
+                  },
                   child: Container(
                     height: 50,
                     width: 210,
@@ -210,7 +221,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
       width: 56,
       decoration: BoxDecoration(
           color: whiteColor, borderRadius: BorderRadius.circular(16)),
-      child: Image.asset(variant),
+      child: Image.network(variant),
     );
   }
 }

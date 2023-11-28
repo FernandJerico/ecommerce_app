@@ -7,7 +7,7 @@ import '../../../../config/theme/theme.dart';
 import '../bloc/auth_bloc.dart';
 
 TextFormField buildFormLogin(BuildContext context, String text, String textType,
-    void Function(String value)? function) {
+    void Function(String value)? function, TextEditingController controller) {
   final obscureText = textType == "password";
 
   return TextFormField(
@@ -18,6 +18,7 @@ TextFormField buildFormLogin(BuildContext context, String text, String textType,
         return null;
       }
     },
+    controller: controller,
     onChanged: (value) => function!(value),
     obscureText: obscureText &&
         context.select((AuthBloc bloc) => bloc.state.obscureText),
