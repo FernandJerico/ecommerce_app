@@ -15,6 +15,7 @@ import 'package:ecommerce_app/features/home/presentation/pages/initial_screen.da
 import 'package:ecommerce_app/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:ecommerce_app/features/profile/presentation/pages/edit_profile_screen.dart';
 import 'package:ecommerce_app/features/shipping/presentation/bloc/add_address/add_address_bloc.dart';
+import 'package:ecommerce_app/features/shipping/presentation/bloc/check_receipt/check_receipt_bloc.dart';
 import 'package:ecommerce_app/features/shipping/presentation/bloc/get_address/get_address_bloc.dart';
 import 'package:ecommerce_app/features/shipping/presentation/bloc/subdistrict/subdistrict_bloc.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ import 'features/cart/presentation/bloc/order/order_bloc.dart';
 import 'features/cart/presentation/bloc/order_detail/order_detail_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'features/order/bloc/buyer_order/buyer_order_bloc.dart';
 import 'features/order/presentation/pages/order_screen.dart';
 import 'features/profile/presentation/pages/profile_screen.dart';
 import 'features/shipping/presentation/bloc/city/city_bloc.dart';
@@ -87,6 +89,12 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => GetCostBloc(),
+          ),
+          BlocProvider(
+            create: (context) => BuyerOrderBloc(),
+          ),
+          BlocProvider(
+            create: (context) => CheckReceiptBloc(),
           ),
         ],
         child: MaterialApp(
