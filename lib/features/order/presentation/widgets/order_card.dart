@@ -19,7 +19,10 @@ class OrderCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const OrderDetailScreen()),
+          MaterialPageRoute(
+              builder: (context) => OrderDetailScreen(
+                    buyerOrder: data,
+                  )),
         );
       },
       child: Container(

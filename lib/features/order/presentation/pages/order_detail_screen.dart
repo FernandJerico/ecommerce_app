@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/config/extensions/date_time_ext.dart';
 import 'package:ecommerce_app/config/extensions/int_ext.dart';
 import 'package:ecommerce_app/config/theme/theme.dart';
+import 'package:ecommerce_app/features/cart/data/model/response/buyer_order_response_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/components/row_text.dart';
@@ -10,7 +11,8 @@ import '../widgets/order_product_tile.dart';
 import '../widgets/order_status.dart';
 
 class OrderDetailScreen extends StatefulWidget {
-  const OrderDetailScreen({super.key});
+  const OrderDetailScreen({super.key, required this.buyerOrder});
+  final BuyerOrder buyerOrder;
 
   @override
   State<OrderDetailScreen> createState() => _OrderDetailScreenState();
@@ -31,6 +33,12 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    int totalItem = 0;
+    int item = 0;
+    for (var element in widget.buyerOrder.attributes.items) {
+      totalItem += element.qty * element.price;
+      item += element.qty;
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Pesanan'),
@@ -50,9 +58,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: products.length,
+            itemCount: widget.buyerOrder.attributes.items.length,
             itemBuilder: (context, index) => OrderProductTile(
-              data: products[index],
+              data: widget.buyerOrder.attributes.items[index],
             ),
           ),
           const SpaceHeight(24.0),
@@ -71,22 +79,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               children: [
                 RowText(
                   label: 'Waktu Pengiriman',
-                  value: DateTime.now().toFormattedDateWithDay(),
+                  value: widget.buyerOrder.attributes.createdAt
+                      .toFormattedDateWithDay(),
                 ),
                 const SpaceHeight(12.0),
-                const RowText(
+                RowText(
                   label: 'Ekspedisi Pengiriman',
-                  value: 'JNE Regular',
+                  value: widget.buyerOrder.attributes.courierName,
                 ),
                 const SpaceHeight(12.0),
-                const RowText(
+                RowText(
                   label: 'No. Resi',
-                  value: 'QQNSU346JK',
+                  value: widget.buyerOrder.attributes.noResi,
                 ),
                 const SpaceHeight(12.0),
-                const RowText(
+                RowText(
                   label: 'Alamat',
-                  value: 'Jalan suka cita no 12',
+                  value: widget.buyerOrder.attributes.deliveryAddress,
                 ),
               ],
             ),
@@ -106,18 +115,20 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             child: Column(
               children: [
                 RowText(
-                  label: 'Item (2)',
-                  value: 1900000.currencyFormatRp,
+                  label: 'Total Item ($item)',
+                  value: totalItem.currencyFormatRp,
                 ),
                 const SpaceHeight(12.0),
                 RowText(
                   label: 'Ongkir',
-                  value: 120000.currencyFormatRp,
+                  value: widget
+                      .buyerOrder.attributes.courierPrice.currencyFormatRp,
                 ),
                 const SpaceHeight(12.0),
                 RowText(
                   label: 'Total ',
-                  value: 2020000.currencyFormatRp,
+                  value:
+                      widget.buyerOrder.attributes.totalPrice.currencyFormatRp,
                   valueColor: primaryColor,
                   fontWeight: FontWeight.w700,
                 ),
