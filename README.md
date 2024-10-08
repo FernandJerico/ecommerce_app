@@ -15,7 +15,7 @@ Nike eCommerce App adalah aplikasi belanja yang dirancang untuk memudahkan pengg
 ## Instalasi & Penggunaan 🚀
 
 ### 1. Clone repository ini:
-    git clone https://github.com/username/nike-ecommerce-app.git
+    git clone https://github.com/FernandJerico/ecommerce_app.git
 ### 2. Masuk ke direktori proyek:
     cd nike-ecommerce-app
 ### 3. Install dependencies:
